@@ -27,9 +27,9 @@ const Hero = () => {
       
       <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
         <div className="animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
+          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
             Siti web che
-            <span className="text-primary block">
+            <span className="text-blue-600 block">
               <AnimatedText 
                 texts={animatedTexts}
                 className="inline-block"
@@ -37,7 +37,7 @@ const Hero = () => {
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
             Ogni azienda ha una storia. Io la trasformo in un sito semplice, bello e professionale.
           </p>
           

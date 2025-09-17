@@ -24,10 +24,10 @@ const Services = () => {
     <section id="servizi" className="py-20 bg-gray-50">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             Cosa offro
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Servizi completi per la tua presenza online, dalla progettazione alla pubblicazione
           </p>
         </div>
@@ -36,18 +36,18 @@ const Services = () => {
           {services.map((service, index) => (
             <div 
               key={index}
-              className="bg-card p-8 rounded-2xl shadow-lg hover-lift animate-scale-in nexivo-shadow"
+              className="bg-white p-8 rounded-2xl shadow-lg hover-lift animate-scale-in nexivo-shadow"
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               <div className="nexivo-gradient w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
                 <service.icon className="w-8 h-8 text-white" />
               </div>
               
-              <h3 className="text-2xl font-bold text-card-foreground mb-4">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
                 {service.title}
               </h3>
               
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-gray-600 leading-relaxed">
                 {service.description}
               </p>
             </div>

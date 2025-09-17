@@ -14,10 +14,10 @@ const Portfolio = () => {
     <section id="portfolio" className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             Portfolio
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Esempi dei miei progetti web più recenti
           </p>
         </div>
@@ -54,7 +54,7 @@ const Portfolio = () => {
               </div>
               
               <div className="mt-6">
-                <h3 className="text-xl font-bold text-nexivo-dark mb-2">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
                   {project.title}
                 </h3>
                 <p className="text-gray-600 mb-4">
@@ -64,13 +64,13 @@ const Portfolio = () => {
                   {project.tags.map((tag) => (
                     <span 
                       key={tag}
-                      className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium"
+                      className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-medium"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                <div className="text-primary font-medium text-sm group-hover:text-nexivo-dark transition-colors">
+                <div className="text-blue-600 font-medium text-sm group-hover:text-gray-900 transition-colors">
                   Clicca per visitare →
                 </div>
               </div>
