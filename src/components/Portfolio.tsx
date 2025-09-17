@@ -11,25 +11,28 @@ const Portfolio = () => {
   ];
 
   return (
-    <section id="portfolio" className="py-20 bg-white">
+    <section id="portfolio" className="py-20 bg-gradient-to-br from-background to-muted/30">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold text-nexivo-dark mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
             Portfolio
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Un esempio del mio lavoro
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Esempi dei miei progetti web più recenti
           </p>
         </div>
         
         <div className="flex justify-center">
           {projects.map((project, index) => (
-            <div 
+            <a
               key={index}
-              className="group cursor-pointer animate-scale-in max-w-md"
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group cursor-pointer animate-scale-in max-w-md block"
               style={{ animationDelay: `${index * 0.2}s` }}
             >
-              <div className="relative overflow-hidden rounded-2xl shadow-lg hover-lift">
+              <div className="relative overflow-hidden rounded-2xl shadow-lg hover-lift nexivo-shadow">
                 <img 
                   src={project.image}
                   alt={project.title}
@@ -40,9 +43,12 @@ const Portfolio = () => {
                     <h3 className="text-xl font-bold text-white mb-2">
                       {project.title}
                     </h3>
-                    <p className="text-gray-200 text-sm">
+                    <p className="text-gray-200 text-sm mb-3">
                       {project.description}
                     </p>
+                    <div className="inline-flex items-center text-white bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium">
+                      Visita il sito →
+                    </div>
                   </div>
                 </div>
               </div>
@@ -54,18 +60,21 @@ const Portfolio = () => {
                 <p className="text-gray-600 mb-4">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag) => (
                     <span 
                       key={tag}
-                      className="px-3 py-1 bg-nexivo-blue/10 text-nexivo-blue rounded-full text-xs font-medium"
+                      className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
+                <div className="text-primary font-medium text-sm group-hover:text-nexivo-dark transition-colors">
+                  Clicca per visitare →
+                </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
