@@ -40,7 +40,7 @@ const Pricing = () => {
   ];
 
   return (
-    <section id="prezzi" className="py-20 bg-gradient-to-br from-background to-muted/30">
+    <section id="prezzi" className="py-20 bg-white">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
