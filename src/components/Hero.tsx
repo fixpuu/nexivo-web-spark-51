@@ -1,7 +1,7 @@
 import { ArrowRight, ArrowDown } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
-// AnimatedText component inline
+// AnimatedText component inline - OTTIMIZZATO
 const AnimatedText = ({ texts, className = '' }: { texts: string[]; className?: string }) => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
@@ -17,7 +17,7 @@ const AnimatedText = ({ texts, className = '' }: { texts: string[]; className?: 
           setCurrentText(targetText.substring(0, charIndex + 1));
           setCharIndex(charIndex + 1);
         } else {
-          setTimeout(() => setIsDeleting(true), 2000);
+          setTimeout(() => setIsDeleting(true), 1500); // Ridotto da 2000 a 1500
         }
       } else {
         if (charIndex > 0) {
@@ -28,7 +28,7 @@ const AnimatedText = ({ texts, className = '' }: { texts: string[]; className?: 
           setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
         }
       }
-    }, isDeleting ? 50 : 100);
+    }, isDeleting ? 30 : 60); // Velocizzato: da 50/100 a 30/60
 
     return () => clearTimeout(timeout);
   }, [charIndex, isDeleting, currentTextIndex, texts]);
@@ -44,6 +44,7 @@ const AnimatedText = ({ texts, className = '' }: { texts: string[]; className?: 
 const Hero = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const animationFrameRef = useRef<number>();
 
   const scrollToServizi = () => {
     const element = document.getElementById('servizi');
@@ -60,19 +61,30 @@ const Hero = () => {
     'emozionano.'
   ];
 
+  // Mouse tracking ottimizzato con throttling
   useEffect(() => {
+    let ticking = false;
+    
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setMousePos({ x: e.clientX, y: e.clientY });
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
+    
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Canvas ottimizzato con meno particelle
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
     canvas.width = window.innerWidth;
@@ -87,14 +99,15 @@ const Hero = () => {
       opacity: number;
     }> = [];
 
-    for (let i = 0; i < 80; i++) {
+    // Ridotto da 80 a 40 particelle per migliorare performance
+    for (let i = 0; i < 40; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 3 + 1,
-        speedX: (Math.random() - 0.5) * 0.5,
-        speedY: (Math.random() - 0.5) * 0.5,
-        opacity: Math.random() * 0.5 + 0.2,
+        size: Math.random() * 2 + 1,
+        speedX: (Math.random() - 0.5) * 0.3,
+        speedY: (Math.random() - 0.5) * 0.3,
+        opacity: Math.random() * 0.4 + 0.2,
       });
     }
 
@@ -113,23 +126,25 @@ const Hero = () => {
         ctx.fillStyle = `rgba(30, 144, 255, ${p.opacity})`;
         ctx.fill();
 
-        particles.forEach((p2, j) => {
-          if (i === j) return;
+        // Ottimizzato: controlla solo le particelle vicine
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
           const dx = p.x - p2.x;
           const dy = p.y - p2.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 150) {
+          if (dist < 120) { // Ridotto da 150 a 120
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(30, 144, 255, ${0.1 * (1 - dist / 150)})`;
+            ctx.strokeStyle = `rgba(30, 144, 255, ${0.15 * (1 - dist / 120)})`;
+            ctx.lineWidth = 0.5;
             ctx.stroke();
           }
-        });
+        }
       });
 
-      requestAnimationFrame(animate);
+      animationFrameRef.current = requestAnimationFrame(animate);
     };
 
     animate();
@@ -140,7 +155,13 @@ const Hero = () => {
     };
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
   }, []);
 
   return (
@@ -151,49 +172,52 @@ const Hero = () => {
         style={{ zIndex: 1 }}
       />
       
-      {/* Floating 3D shapes */}
+      {/* Floating 3D shapes - OTTIMIZZATO */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 2 }}>
         <div 
-          className="absolute w-96 h-96 rounded-full opacity-20"
+          className="absolute w-96 h-96 rounded-full opacity-20 transition-transform duration-200 ease-out"
           style={{
             background: 'linear-gradient(135deg, #1E90FF 0%, #00BFFF 100%)',
             filter: 'blur(80px)',
             animation: 'float 20s ease-in-out infinite',
             top: '10%',
             left: '10%',
-            transform: `translate(${mousePos.x * 0.02}px, ${mousePos.y * 0.02}px)`,
+            transform: `translate(${mousePos.x * 0.015}px, ${mousePos.y * 0.015}px)`,
+            willChange: 'transform',
           }}
         />
         <div 
-          className="absolute w-64 h-64 rounded-full opacity-20"
+          className="absolute w-64 h-64 rounded-full opacity-20 transition-transform duration-200 ease-out"
           style={{
             background: 'linear-gradient(135deg, #FF1E90 0%, #FF00BF 100%)',
             filter: 'blur(60px)',
             animation: 'float 15s ease-in-out infinite reverse',
             top: '60%',
             right: '15%',
-            transform: `translate(${-mousePos.x * 0.03}px, ${-mousePos.y * 0.03}px)`,
+            transform: `translate(${-mousePos.x * 0.02}px, ${-mousePos.y * 0.02}px)`,
+            willChange: 'transform',
           }}
         />
         <div 
-          className="absolute w-80 h-80 rounded-full opacity-15"
+          className="absolute w-80 h-80 rounded-full opacity-15 transition-transform duration-200 ease-out"
           style={{
             background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
             filter: 'blur(70px)',
             animation: 'float 18s ease-in-out infinite',
             bottom: '10%',
             left: '40%',
-            transform: `translate(${mousePos.x * 0.015}px, ${mousePos.y * 0.015}px)`,
+            transform: `translate(${mousePos.x * 0.01}px, ${mousePos.y * 0.01}px)`,
+            willChange: 'transform',
           }}
         />
       </div>
       
       <div className="max-w-6xl mx-auto px-6 text-center relative" style={{ zIndex: 10 }}>
         <div 
-          className="animate-fade-in"
+          className="animate-fade-in transition-transform duration-150 ease-out"
           style={{
-            transform: `perspective(1000px) rotateX(${mousePos.y * 0.01}deg) rotateY(${mousePos.x * 0.01}deg)`,
-            transition: 'transform 0.1s ease-out',
+            transform: `perspective(1000px) rotateX(${mousePos.y * 0.005}deg) rotateY(${mousePos.x * 0.005}deg)`,
+            willChange: 'transform',
           }}
         >
           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
