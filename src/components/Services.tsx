@@ -140,4 +140,35 @@ const Services = () => {
                     transition: 'transform 0.5s ease',
                   }}
                 />
-              </
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes gridScroll {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(50px); }
+        }
+        
+        @keyframes particle1 {
+          0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+          100% { transform: translate(20px, -20px) scale(0); opacity: 0; }
+        }
+        
+        @keyframes particle2 {
+          0% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+          100% { transform: translate(-15px, -25px) scale(0); opacity: 0; }
+        }
+        
+        @keyframes particle3 {
+          0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+          100% { transform: translate(10px, -30px) scale(0); opacity: 0; }
+        }
+      `}</style>
+    </section>
+  );
+};
+
+export default Services;
