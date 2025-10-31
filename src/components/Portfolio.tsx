@@ -44,7 +44,7 @@ const Portfolio = () => {
         
         <div className="flex justify-center">
           {projects.map((project, index) => (
-            
+            <a
               key={index}
               href={project.url}
               target="_blank"
@@ -100,3 +100,47 @@ const Portfolio = () => {
                           </p>
                           <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/20 backdrop-blur-lg rounded-full border border-white/30 font-semibold hover:bg-white/30 transition-all duration-300">
                             <span>Visita il sito</span>
+                            <ExternalLink className="w-4 h-4" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Project info */}
+                  <div className="p-8">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag, tagIndex) => (
+                        <span 
+                          key={tagIndex}
+                          className={`px-3 py-1 bg-gradient-to-r ${project.gradient} text-white text-sm font-medium rounded-full`}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes rotate {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `}</style>
+    </section>
+  );
+};
+
+export default Portfolio;
