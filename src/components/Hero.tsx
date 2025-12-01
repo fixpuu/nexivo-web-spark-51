@@ -1,7 +1,6 @@
 import { ArrowRight, ArrowDown, Sparkles, Zap } from 'lucide-react';
 import { useEffect, useRef, useState, useMemo, memo } from 'react';
 
-// AnimatedText component OTTIMIZZATO con memo
 const AnimatedText = memo(({ texts, className = '' }: { texts: string[]; className?: string }) => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
@@ -65,7 +64,6 @@ const Hero = () => {
     'emozionano.'
   ], []);
 
-  // Mouse tracking OTTIMIZZATO
   useEffect(() => {
     let ticking = false;
     let lastTime = 0;
@@ -87,7 +85,6 @@ const Hero = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // 3D Parallax effect on title
   useEffect(() => {
     const handleParallax = () => {
       if (!titleRef.current) return;
@@ -110,7 +107,6 @@ const Hero = () => {
     handleParallax();
   }, [mousePos]);
 
-  // Canvas MOLTO ottimizzato con effetti 3D
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -133,8 +129,9 @@ const Hero = () => {
       color: string;
     }> = [];
 
-    // Particelle 3D con profondità
-    for (let i = 0; i < 40; i++) {
+    const particleCount = window.innerWidth < 768 ? 20 : 40;
+
+    for (let i = 0; i < particleCount; i++) {
       const colors = ['#1E90FF', '#00BFFF', '#4169E1', '#6495ED', '#87CEEB'];
       particles.push({
         x: Math.random() * canvas.width,
@@ -166,7 +163,6 @@ const Hero = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((p, i) => {
-        // Movimento 3D
         p.z -= p.speedZ;
         if (p.z <= 0) {
           p.z = 1000;
@@ -174,7 +170,6 @@ const Hero = () => {
           p.y = Math.random() * canvas.height;
         }
 
-        // Proiezione 3D
         const scale = 1000 / (1000 + p.z);
         const x2d = (p.x - canvas.width / 2) * scale + canvas.width / 2;
         const y2d = (p.y - canvas.height / 2) * scale + canvas.height / 2;
@@ -186,7 +181,6 @@ const Hero = () => {
         if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
         if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
 
-        // Particelle con glow 3D
         ctx.shadowBlur = 15 * scale;
         ctx.shadowColor = p.color;
         ctx.beginPath();
@@ -197,7 +191,6 @@ const Hero = () => {
         ctx.shadowBlur = 0;
         ctx.globalAlpha = 1;
 
-        // Connessioni 3D
         for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
           const dx = p.x - p2.x;
@@ -243,17 +236,16 @@ const Hero = () => {
   }, []);
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-50 relative overflow-hidden">
+    <section id="hero" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-50 relative overflow-hidden pt-20 md:pt-0">
       <canvas
         ref={canvasRef}
         className="absolute inset-0 pointer-events-none"
         style={{ zIndex: 1 }}
       />
       
-      {/* Floating 3D shapes con effetti migliorati */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 2 }}>
         <div 
-          className="absolute w-96 h-96 rounded-full opacity-20 will-change-transform"
+          className="absolute w-64 h-64 sm:w-96 sm:h-96 rounded-full opacity-20 will-change-transform"
           style={{
             background: 'linear-gradient(135deg, #1E90FF 0%, #00BFFF 100%)',
             filter: 'blur(80px)',
@@ -265,7 +257,7 @@ const Hero = () => {
           }}
         />
         <div 
-          className="absolute w-64 h-64 rounded-full opacity-20 will-change-transform"
+          className="absolute w-48 h-48 sm:w-64 sm:h-64 rounded-full opacity-20 will-change-transform"
           style={{
             background: 'linear-gradient(135deg, #FF1E90 0%, #FF00BF 100%)',
             filter: 'blur(60px)',
@@ -276,43 +268,30 @@ const Hero = () => {
             transition: 'transform 0.3s ease-out',
           }}
         />
-        <div 
-          className="absolute w-80 h-80 rounded-full opacity-15 will-change-transform"
-          style={{
-            background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
-            filter: 'blur(70px)',
-            animation: 'float 18s ease-in-out infinite, pulse 5s ease-in-out infinite',
-            bottom: '10%',
-            left: '40%',
-            transform: `translate3d(${mousePos.x * 0.015}px, ${mousePos.y * 0.015}px, 0) scale(${isHovered ? 1.1 : 1})`,
-            transition: 'transform 0.3s ease-out',
-          }}
-        />
       </div>
       
-      <div className="max-w-6xl mx-auto px-6 text-center relative" style={{ zIndex: 10 }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center relative" style={{ zIndex: 10 }}>
         <div 
           className="animate-fade-in will-change-transform"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {/* Badge animato */}
-          <div className="inline-flex items-center gap-2 mb-6 px-6 py-3 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-lg rounded-full border border-blue-300/30 shadow-lg animate-bounce-in">
-            <Sparkles className="w-5 h-5 text-blue-600 animate-spin-slow" />
-            <span className="text-blue-600 font-semibold text-sm">✨ Web Design Professionale</span>
-            <Zap className="w-5 h-5 text-purple-600 animate-pulse" />
+          <div className="inline-flex items-center gap-2 mb-4 sm:mb-6 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-lg rounded-full border border-blue-300/30 shadow-lg animate-bounce-in">
+            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 animate-spin-slow" />
+            <span className="text-blue-600 font-semibold text-xs sm:text-sm">✨ Web Design Professionale</span>
+            <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 animate-pulse" />
           </div>
 
           <h1 
             ref={titleRef}
-            className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight"
+            className="text-3xl sm:text-5xl md:text-7xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight px-4"
             style={{
               transformStyle: 'preserve-3d',
               transition: 'transform 0.1s ease-out',
             }}
           >
             Siti web che
-            <span className="text-blue-600 block relative">
+            <span className="text-blue-600 block relative mt-2">
               <AnimatedText 
                 texts={animatedTexts}
                 className="inline-block"
@@ -324,17 +303,16 @@ const Hero = () => {
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed transform hover:scale-105 transition-transform duration-300">
+          <p className="text-base sm:text-xl md:text-2xl text-gray-600 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed transform hover:scale-105 transition-transform duration-300 px-4">
             Ogni azienda ha una storia. Io la trasformo in un sito semplice, bello e professionale.
           </p>
           
           <button
             onClick={scrollToServizi}
-            className="group inline-flex items-center gap-3 nexivo-gradient text-white px-10 py-5 rounded-full text-lg font-semibold nexivo-shadow hover-lift relative overflow-hidden transform hover:scale-110 transition-all duration-300"
+            className="group inline-flex items-center gap-2 sm:gap-3 nexivo-gradient text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-semibold nexivo-shadow hover-lift relative overflow-hidden transform hover:scale-110 transition-all duration-300"
           >
             <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
-            {/* Particelle animate nel bottone */}
             <span className="absolute inset-0 overflow-hidden">
               {[...Array(6)].map((_, i) => (
                 <span
@@ -348,17 +326,18 @@ const Hero = () => {
               ))}
             </span>
             
-            <span className="relative z-10 flex items-center gap-3">
-              <Sparkles className="w-5 h-5 animate-spin-slow" />
-              Scopri cosa offro
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 group-hover:scale-125 transition-all duration-300" />
+            <span className="relative z-10 flex items-center gap-2 sm:gap-3">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 animate-spin-slow" />
+              <span className="hidden sm:inline">Scopri cosa offro</span>
+              <span className="sm:hidden">Scopri</span>
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-2 group-hover:scale-125 transition-all duration-300" />
             </span>
           </button>
           
-          <div className="mt-16 animate-bounce cursor-pointer" onClick={scrollToServizi}>
+          <div className="mt-12 sm:mt-16 animate-bounce cursor-pointer" onClick={scrollToServizi}>
             <div className="relative inline-block">
               <ArrowDown 
-                className="w-10 h-10 text-primary mx-auto hover:text-accent transition-colors relative z-10"
+                className="w-8 h-8 sm:w-10 sm:h-10 text-primary mx-auto hover:text-accent transition-colors relative z-10"
                 style={{
                   filter: 'drop-shadow(0 0 10px rgba(30, 144, 255, 0.5))',
                 }}
