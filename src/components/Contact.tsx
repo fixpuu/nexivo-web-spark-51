@@ -203,7 +203,7 @@ const Contact = () => {
             {[
               { value: '7', label: 'Giorni di consegna', icon: Zap, color: 'from-yellow-400 to-orange-500' },
               { value: '100%', label: 'Soddisfazione', icon: Star, color: 'from-blue-400 to-cyan-500' },
-              { value: '24/7', label: 'Supporto', icon: Heart, color: 'from-pink-400 to-rose-500' },
+              { value: '24/72h', label: 'Consegna', icon: Heart, color: 'from-pink-400 to-rose-500' },
             ].map((stat, index) => (
               <div 
                 key={index}
@@ -247,7 +247,7 @@ const Contact = () => {
               <span className="text-white font-bold text-xl sm:text-2xl md:text-3xl transform hover:scale-110 transition-transform duration-300">Nexivo</span>
             </div>
             <p className="text-gray-400 text-xs sm:text-sm transform hover:text-gray-300 transition-colors duration-300">
-              © 2025 Nexivo. Tutti i diritti riservati.
+              © 2026 Nexivo. Tutti i diritti riservati.
             </p>
           </div>
         </div>

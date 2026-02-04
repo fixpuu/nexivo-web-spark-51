@@ -160,7 +160,7 @@ const About = () => {
           </div>
           
           <div 
-            className="animate-scale-in relative group"
+            className="animate-scale-in relative group overflow-hidden md:overflow-visible mt-8 md:mt-0"
             style={{
               transform: `translateX(${scrollY * 0.05}px) perspective(1000px) rotateY(${scrollY * 0.02}deg)`,
               transition: 'transform 0.1s ease-out',
@@ -168,7 +168,7 @@ const About = () => {
             onMouseEnter={() => setIsImageHovered(true)}
             onMouseLeave={() => setIsImageHovered(false)}
           >
-            <div className="absolute -inset-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur-3xl opacity-20 group-hover:opacity-50 transition-opacity duration-500" />
+            <div className="absolute -inset-2 md:-inset-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur-3xl opacity-20 group-hover:opacity-50 transition-opacity duration-500" />
             
             {/* Immagine con effetto 3D avanzato */}
             <div className="relative overflow-hidden rounded-2xl">
@@ -196,9 +196,9 @@ const About = () => {
               )}
             </div>
             
-            {/* Floating elements POTENZIATI */}
+            {/* Floating elements POTENZIATI - nascosti su mobile per evitare overflow */}
             <div 
-              className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-16 h-16 sm:w-24 sm:h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl opacity-80 blur-sm shadow-2xl"
+              className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-16 h-16 sm:w-24 sm:h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl opacity-80 blur-sm shadow-2xl hidden sm:block"
               style={{
                 animation: 'float 3s ease-in-out infinite, rotate 10s linear infinite',
                 animationDelay: '0s',
@@ -209,7 +209,7 @@ const About = () => {
               <Zap className="w-8 h-8 sm:w-12 sm:h-12 text-white m-auto mt-4 sm:mt-6 animate-pulse" />
             </div>
             <div 
-              className="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-br from-green-400 to-blue-500 rounded-full opacity-70 blur-sm shadow-2xl"
+              className="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-br from-green-400 to-blue-500 rounded-full opacity-70 blur-sm shadow-2xl hidden sm:block"
               style={{
                 animation: 'float 4s ease-in-out infinite, rotate 12s linear infinite reverse',
                 animationDelay: '1s',
