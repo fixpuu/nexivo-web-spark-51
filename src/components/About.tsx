@@ -78,15 +78,9 @@ const About = () => {
         }}
       />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-          <div 
-            className="animate-fade-in"
-            style={{
-              transform: `translateX(${-scrollY * 0.05}px)`,
-              transition: 'transform 0.1s ease-out',
-            }}
-          >
+          <div className="animate-fade-in text-center md:text-left">
             {/* Badge animato */}
             <div className="inline-flex items-center gap-2 mb-4 sm:mb-6 px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-50 rounded-full border border-blue-200 animate-bounce-in">
               <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600 animate-pulse" />
@@ -108,20 +102,20 @@ const About = () => {
             </h2>
             
             <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-600 leading-relaxed">
-              <p className="transform hover:translate-x-2 transition-transform duration-300 hover:text-gray-900 relative group">
-                <span className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <p className="transform md:hover:translate-x-2 transition-transform duration-300 hover:text-gray-900 relative group">
+                <span className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:block" />
                 Sono un web designer freelance. Aiuto piccole attività, negozi e professionisti 
                 a presentarsi online con un sito chiaro, moderno e su misura.
               </p>
               
-              <p className="transform hover:translate-x-2 transition-transform duration-300 hover:text-gray-900 relative group">
-                <span className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <p className="transform md:hover:translate-x-2 transition-transform duration-300 hover:text-gray-900 relative group">
+                <span className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:block" />
                 Ogni progetto è personalizzato e viene consegnato in pochi giorni, 
                 con supporto e trasparenza.
               </p>
               
               {/* Skills badges */}
-              <div className="flex flex-wrap gap-2 sm:gap-3 pt-3 sm:pt-4">
+              <div className="flex flex-wrap gap-2 sm:gap-3 pt-3 sm:pt-4 justify-center md:justify-start">
                 {[
                   { icon: Code, label: 'Web Development', color: 'from-blue-500 to-cyan-500' },
                   { icon: Palette, label: 'UI/UX Design', color: 'from-purple-500 to-pink-500' },
@@ -140,7 +134,7 @@ const About = () => {
                 ))}
               </div>
               
-              <div className="flex items-center gap-3 sm:gap-4 pt-4 sm:pt-6">
+              <div className="flex items-center justify-center md:justify-start gap-3 sm:gap-4 pt-4 sm:pt-6">
                 <div 
                   className="relative w-12 h-12 sm:w-16 sm:h-16 nexivo-gradient rounded-full flex items-center justify-center group flex-shrink-0"
                   style={{
