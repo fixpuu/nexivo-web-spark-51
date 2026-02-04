@@ -284,7 +284,7 @@ const Hero = () => {
 
           <h1 
             ref={titleRef}
-            className="text-3xl sm:text-5xl md:text-7xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight px-4"
+            className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 mb-3 sm:mb-6 leading-tight px-2 sm:px-4"
             style={{
               transformStyle: 'preserve-3d',
               transition: 'transform 0.1s ease-out',
@@ -303,7 +303,7 @@ const Hero = () => {
             </span>
           </h1>
           
-          <p className="text-base sm:text-xl md:text-2xl text-gray-600 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed transform hover:scale-105 transition-transform duration-300 px-4">
+          <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-6 sm:mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed transform hover:scale-105 transition-transform duration-300 px-2 sm:px-4">
             Ogni azienda ha una storia. Io la trasformo in un sito semplice, bello e professionale.
           </p>
           
@@ -334,7 +334,7 @@ const Hero = () => {
             </span>
           </button>
           
-          <div className="mt-12 sm:mt-16 animate-bounce cursor-pointer" onClick={scrollToServizi}>
+          <div className="mt-8 sm:mt-12 md:mt-16 animate-bounce cursor-pointer" onClick={scrollToServizi}>
             <div className="relative inline-block">
               <ArrowDown 
                 className="w-8 h-8 sm:w-10 sm:h-10 text-primary mx-auto hover:text-accent transition-colors relative z-10"

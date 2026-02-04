@@ -50,7 +50,7 @@ const Contact = () => {
     <section 
       ref={sectionRef}
       id="contatti" 
-      className="py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden"
+      className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden"
     >
       {/* Animated starfield background MIGLIORATO */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -73,7 +73,7 @@ const Contact = () => {
       {/* Floating orbs POTENZIATI */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div 
-          className="absolute w-96 h-96 rounded-full"
+          className="absolute w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 rounded-full"
           style={{
             background: 'radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, transparent 70%)',
             top: '-10%',
@@ -85,7 +85,7 @@ const Contact = () => {
           }}
         />
         <div 
-          className="absolute w-80 h-80 rounded-full"
+          className="absolute w-40 h-40 sm:w-60 sm:h-60 md:w-80 md:h-80 rounded-full"
           style={{
             background: 'radial-gradient(circle, rgba(168, 85, 247, 0.5) 0%, transparent 70%)',
             bottom: '-10%',
@@ -97,7 +97,7 @@ const Contact = () => {
           }}
         />
         <div 
-          className="absolute w-64 h-64 rounded-full"
+          className="absolute w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full"
           style={{
             background: 'radial-gradient(circle, rgba(236, 72, 153, 0.4) 0%, transparent 70%)',
             top: '50%',
@@ -118,28 +118,28 @@ const Contact = () => {
         }}
       />
 
-      <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
         <div className="animate-fade-in">
           {/* Badge POTENZIATO */}
-          <div className="inline-flex items-center gap-2 mb-6 px-6 py-3 bg-white/10 backdrop-blur-lg rounded-full border border-white/20 shadow-2xl animate-bounce-in">
-            <Sparkles className="w-5 h-5 text-yellow-400 animate-pulse" />
-            <span className="text-white font-semibold">Iniziamo insieme</span>
-            <Zap className="w-5 h-5 text-blue-400 animate-ping" />
+          <div className="inline-flex items-center gap-2 mb-4 sm:mb-6 px-4 sm:px-6 py-2 sm:py-3 bg-white/10 backdrop-blur-lg rounded-full border border-white/20 shadow-2xl animate-bounce-in">
+            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 animate-pulse" />
+            <span className="text-white font-semibold text-sm sm:text-base">Iniziamo insieme</span>
+            <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 animate-ping" />
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 transform hover:scale-105 transition-transform duration-300">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 transform hover:scale-105 transition-transform duration-300 px-2">
             Hai un progetto?
             <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mt-2 animate-gradient">
               Scrivimi.
             </span>
           </h2>
           
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed transform hover:scale-105 transition-transform duration-300">
+          <p className="text-base sm:text-xl text-gray-300 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed transform hover:scale-105 transition-transform duration-300 px-2">
             Parlami della tua attività, ti rispondo in giornata con un'idea su misura.
           </p>
           
           {/* CTA Button ULTRA POTENZIATO */}
-          <div className="relative inline-block group mb-12">
+          <div className="relative inline-block group mb-8 sm:mb-12">
             <div 
               className="absolute -inset-2 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full blur-2xl opacity-70 group-hover:opacity-100 transition-all duration-500 animate-pulse-glow"
               style={{
@@ -150,7 +150,7 @@ const Contact = () => {
               onClick={copyEmailAndNotify}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-              className="relative inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white px-10 py-5 rounded-full text-lg font-semibold shadow-2xl overflow-hidden group transform hover:scale-110 transition-all duration-300"
+              className="relative inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white px-6 sm:px-8 md:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg font-semibold shadow-2xl overflow-hidden group transform hover:scale-110 transition-all duration-300"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-700 via-purple-700 to-pink-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               
@@ -192,14 +192,14 @@ const Contact = () => {
                 }}
               />
               
-              <Mail className="w-6 h-6 relative z-10 group-hover:scale-110 group-hover:rotate-12 transition-transform" />
+              <Mail className="w-5 h-5 sm:w-6 sm:h-6 relative z-10 group-hover:scale-110 group-hover:rotate-12 transition-transform" />
               <span className="relative z-10">Scrivimi</span>
-              <Send className="w-6 h-6 relative z-10 group-hover:translate-x-2 group-hover:-translate-y-1 transition-transform" />
+              <Send className="w-5 h-5 sm:w-6 sm:h-6 relative z-10 group-hover:translate-x-2 group-hover:-translate-y-1 transition-transform" />
             </button>
           </div>
 
           {/* Stats section MIGLIORATA */}
-          <div className="grid grid-cols-3 gap-8 mt-16 max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mt-10 sm:mt-16 max-w-3xl mx-auto">
             {[
               { value: '7', label: 'Giorni di consegna', icon: Zap, color: 'from-yellow-400 to-orange-500' },
               { value: '100%', label: 'Soddisfazione', icon: Star, color: 'from-blue-400 to-cyan-500' },
@@ -207,7 +207,7 @@ const Contact = () => {
             ].map((stat, index) => (
               <div 
                 key={index}
-                className="group bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-4 hover:border-white/20 hover:shadow-2xl relative overflow-hidden"
+                className="group bg-white/5 backdrop-blur-lg rounded-2xl p-4 sm:p-5 md:p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-4 hover:border-white/20 hover:shadow-2xl relative overflow-hidden"
                 style={{
                   animation: `fadeInUp 0.8s ease-out ${index * 0.2}s both`,
                 }}
@@ -218,15 +218,15 @@ const Contact = () => {
                 />
                 
                 {/* Icon animato */}
-                <div className="relative mb-3">
-                  <stat.icon className="w-12 h-12 mx-auto text-white group-hover:scale-125 group-hover:rotate-12 transition-all duration-500" />
+                <div className="relative mb-2 sm:mb-3">
+                  <stat.icon className="w-10 h-10 sm:w-12 sm:h-12 mx-auto text-white group-hover:scale-125 group-hover:rotate-12 transition-all duration-500" />
                   <div className="absolute inset-0 bg-white rounded-full blur-xl opacity-0 group-hover:opacity-50 animate-ping" />
                 </div>
                 
-                <div className="text-4xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">
                   {stat.value}
                 </div>
-                <div className="text-sm text-gray-300">{stat.label}</div>
+                <div className="text-xs sm:text-sm text-gray-300">{stat.label}</div>
 
                 {/* Decorative corner */}
                 <div 
@@ -237,16 +237,16 @@ const Contact = () => {
           </div>
           
           {/* Footer MIGLIORATO */}
-          <div className="mt-16 pt-12 border-t border-white/10">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="relative w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center animate-pulse-glow">
-                <span className="text-white font-bold text-2xl relative z-10">N</span>
+          <div className="mt-10 sm:mt-16 pt-8 sm:pt-12 border-t border-white/10">
+            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+              <div className="relative w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center animate-pulse-glow flex-shrink-0">
+                <span className="text-white font-bold text-lg sm:text-2xl relative z-10">N</span>
                 <div className="absolute inset-0 rounded-full animate-ping bg-blue-400 opacity-20" style={{ animationDuration: '3s' }} />
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full blur-xl opacity-50" />
               </div>
-              <span className="text-white font-bold text-3xl transform hover:scale-110 transition-transform duration-300">Nexivo</span>
+              <span className="text-white font-bold text-xl sm:text-2xl md:text-3xl transform hover:scale-110 transition-transform duration-300">Nexivo</span>
             </div>
-            <p className="text-gray-400 text-sm transform hover:text-gray-300 transition-colors duration-300">
+            <p className="text-gray-400 text-xs sm:text-sm transform hover:text-gray-300 transition-colors duration-300">
               © 2025 Nexivo. Tutti i diritti riservati.
             </p>
           </div>

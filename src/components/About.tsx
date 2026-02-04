@@ -32,12 +32,12 @@ const About = () => {
     <section 
       ref={sectionRef}
       id="chi-sono" 
-      className="py-20 bg-white relative overflow-hidden"
+      className="py-12 sm:py-16 md:py-20 bg-white relative overflow-hidden"
     >
       {/* Animated background elements POTENZIATI */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div 
-          className="absolute w-96 h-96 rounded-full opacity-10"
+          className="absolute w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 rounded-full opacity-10"
           style={{
             background: 'radial-gradient(circle, #1E90FF 0%, transparent 70%)',
             top: '20%',
@@ -48,7 +48,7 @@ const About = () => {
           }}
         />
         <div 
-          className="absolute w-64 h-64 rounded-full opacity-10"
+          className="absolute w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full opacity-10"
           style={{
             background: 'radial-gradient(circle, #FF1E90 0%, transparent 70%)',
             bottom: '10%',
@@ -59,7 +59,7 @@ const About = () => {
           }}
         />
         <div 
-          className="absolute w-80 h-80 rounded-full opacity-10"
+          className="absolute w-40 h-40 sm:w-60 sm:h-60 md:w-80 md:h-80 rounded-full opacity-10"
           style={{
             background: 'radial-gradient(circle, #FFD700 0%, transparent 70%)',
             top: '50%',
@@ -78,8 +78,8 @@ const About = () => {
         }}
       />
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div 
             className="animate-fade-in"
             style={{
@@ -88,12 +88,12 @@ const About = () => {
             }}
           >
             {/* Badge animato */}
-            <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-blue-50 rounded-full border border-blue-200 animate-bounce-in">
-              <Sparkles className="w-4 h-4 text-blue-600 animate-pulse" />
-              <span className="text-blue-600 font-semibold text-sm">Chi sono</span>
+            <div className="inline-flex items-center gap-2 mb-4 sm:mb-6 px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-50 rounded-full border border-blue-200 animate-bounce-in">
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600 animate-pulse" />
+              <span className="text-blue-600 font-semibold text-xs sm:text-sm">Chi sono</span>
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-bold text-nexivo-dark mb-6 leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-nexivo-dark mb-4 sm:mb-6 leading-tight">
               Una mente giovane.
               <span className="text-nexivo-blue block relative mt-2">
                 Un approccio professionale.
@@ -107,7 +107,7 @@ const About = () => {
               </span>
             </h2>
             
-            <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
+            <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-600 leading-relaxed">
               <p className="transform hover:translate-x-2 transition-transform duration-300 hover:text-gray-900 relative group">
                 <span className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 Sono un web designer freelance. Aiuto piccole attività, negozi e professionisti 
@@ -121,7 +121,7 @@ const About = () => {
               </p>
               
               {/* Skills badges */}
-              <div className="flex flex-wrap gap-3 pt-4">
+              <div className="flex flex-wrap gap-2 sm:gap-3 pt-3 sm:pt-4">
                 {[
                   { icon: Code, label: 'Web Development', color: 'from-blue-500 to-cyan-500' },
                   { icon: Palette, label: 'UI/UX Design', color: 'from-purple-500 to-pink-500' },
@@ -129,31 +129,31 @@ const About = () => {
                 ].map((skill, i) => (
                   <div
                     key={i}
-                    className={`group flex items-center gap-2 px-4 py-2 bg-gradient-to-r ${skill.color} rounded-full text-white text-sm font-medium shadow-lg transform hover:scale-110 hover:-translate-y-1 transition-all duration-300 cursor-pointer`}
+                    className={`group flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r ${skill.color} rounded-full text-white text-xs sm:text-sm font-medium shadow-lg transform hover:scale-110 hover:-translate-y-1 transition-all duration-300 cursor-pointer`}
                     style={{
                       animation: `fadeInUp 0.5s ease-out ${i * 0.1}s both`,
                     }}
                   >
-                    <skill.icon className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
+                    <skill.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:rotate-12 transition-transform duration-300 flex-shrink-0" />
                     <span>{skill.label}</span>
                   </div>
                 ))}
               </div>
               
-              <div className="flex items-center gap-4 pt-6">
+              <div className="flex items-center gap-3 sm:gap-4 pt-4 sm:pt-6">
                 <div 
-                  className="relative w-16 h-16 nexivo-gradient rounded-full flex items-center justify-center group"
+                  className="relative w-12 h-12 sm:w-16 sm:h-16 nexivo-gradient rounded-full flex items-center justify-center group flex-shrink-0"
                   style={{
                     animation: 'pulse 2s ease-in-out infinite',
                   }}
                 >
-                  <span className="text-white font-bold text-2xl relative z-10">N</span>
+                  <span className="text-white font-bold text-lg sm:text-2xl relative z-10">N</span>
                   <div className="absolute inset-0 rounded-full animate-ping bg-blue-400 opacity-20 group-hover:opacity-40" style={{ animationDuration: '3s' }} />
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-300" />
                 </div>
-                <div className="transform hover:translate-x-2 transition-transform duration-300">
-                  <p className="font-semibold text-nexivo-dark text-lg">Nexivo</p>
-                  <p className="text-sm text-gray-500">Web Designer Freelance</p>
+                <div className="transform hover:translate-x-2 transition-transform duration-300 min-w-0">
+                  <p className="font-semibold text-nexivo-dark text-base sm:text-lg">Nexivo</p>
+                  <p className="text-xs sm:text-sm text-gray-500">Web Designer Freelance</p>
                 </div>
               </div>
             </div>
@@ -198,7 +198,7 @@ const About = () => {
             
             {/* Floating elements POTENZIATI */}
             <div 
-              className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl opacity-80 blur-sm shadow-2xl"
+              className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-16 h-16 sm:w-24 sm:h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl opacity-80 blur-sm shadow-2xl"
               style={{
                 animation: 'float 3s ease-in-out infinite, rotate 10s linear infinite',
                 animationDelay: '0s',
@@ -206,10 +206,10 @@ const About = () => {
                 transition: 'transform 0.5s ease',
               }}
             >
-              <Zap className="w-12 h-12 text-white m-auto mt-6 animate-pulse" />
+              <Zap className="w-8 h-8 sm:w-12 sm:h-12 text-white m-auto mt-4 sm:mt-6 animate-pulse" />
             </div>
             <div 
-              className="absolute -bottom-8 -left-8 w-28 h-28 bg-gradient-to-br from-green-400 to-blue-500 rounded-full opacity-70 blur-sm shadow-2xl"
+              className="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-br from-green-400 to-blue-500 rounded-full opacity-70 blur-sm shadow-2xl"
               style={{
                 animation: 'float 4s ease-in-out infinite, rotate 12s linear infinite reverse',
                 animationDelay: '1s',
@@ -217,7 +217,7 @@ const About = () => {
                 transition: 'transform 0.5s ease',
               }}
             >
-              <Sparkles className="w-14 h-14 text-white m-auto mt-7 animate-spin-slow" />
+              <Sparkles className="w-10 h-10 sm:w-14 sm:h-14 text-white m-auto mt-5 sm:mt-7 animate-spin-slow" />
             </div>
             
             {/* Particelle animate attorno all'immagine */}

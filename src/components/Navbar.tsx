@@ -83,16 +83,16 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 bg-white shadow-2xl z-50 md:hidden transform transition-transform duration-300 ${
+        className={`fixed top-0 right-0 h-full w-56 sm:w-64 bg-white shadow-2xl z-50 md:hidden transform transition-transform duration-300 ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="flex flex-col p-6 pt-20">
+        <div className="flex flex-col p-4 sm:p-6 pt-16 sm:pt-20">
           {menuItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className="text-nexivo-dark hover:text-nexivo-blue transition-colors duration-300 font-medium py-4 text-lg border-b border-gray-100 text-left"
+              className="text-nexivo-dark hover:text-nexivo-blue transition-colors duration-300 font-medium py-3 sm:py-4 text-base sm:text-lg border-b border-gray-100 text-left"
             >
               {item.label}
             </button>
