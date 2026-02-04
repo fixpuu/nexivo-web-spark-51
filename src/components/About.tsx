@@ -159,8 +159,9 @@ const About = () => {
             </div>
           </div>
           
+          {/* Immagine - visibile solo da tablet in su */}
           <div 
-            className="animate-scale-in relative group overflow-hidden md:overflow-visible mt-8 md:mt-0"
+            className="hidden md:block animate-scale-in relative group"
             style={{
               transform: `translateX(${scrollY * 0.05}px) perspective(1000px) rotateY(${scrollY * 0.02}deg)`,
               transition: 'transform 0.1s ease-out',
@@ -168,9 +169,8 @@ const About = () => {
             onMouseEnter={() => setIsImageHovered(true)}
             onMouseLeave={() => setIsImageHovered(false)}
           >
-            <div className="absolute -inset-2 md:-inset-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur-3xl opacity-20 group-hover:opacity-50 transition-opacity duration-500" />
+            <div className="absolute -inset-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur-3xl opacity-20 group-hover:opacity-50 transition-opacity duration-500" />
             
-            {/* Immagine con effetto 3D avanzato */}
             <div className="relative overflow-hidden rounded-2xl">
               <img 
                 src="/lovable-uploads/a09c768e-c145-4d1f-aa92-f10525a22e3e.png"
@@ -182,7 +182,6 @@ const About = () => {
                 }}
               />
               
-              {/* Overlay con effetto shimmer */}
               <div 
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 pointer-events-none"
                 style={{
@@ -190,26 +189,23 @@ const About = () => {
                 }}
               />
 
-              {/* Border glow animato */}
               {isImageHovered && (
                 <div className="absolute inset-0 border-4 border-blue-400/50 rounded-2xl animate-border-glow" />
               )}
             </div>
             
-            {/* Floating elements POTENZIATI - nascosti su mobile per evitare overflow */}
             <div 
-              className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-16 h-16 sm:w-24 sm:h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl opacity-80 blur-sm shadow-2xl hidden sm:block"
+              className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl opacity-80 blur-sm shadow-2xl"
               style={{
                 animation: 'float 3s ease-in-out infinite, rotate 10s linear infinite',
-                animationDelay: '0s',
                 transform: isImageHovered ? 'scale(1.3)' : 'scale(1)',
                 transition: 'transform 0.5s ease',
               }}
             >
-              <Zap className="w-8 h-8 sm:w-12 sm:h-12 text-white m-auto mt-4 sm:mt-6 animate-pulse" />
+              <Zap className="w-12 h-12 text-white m-auto mt-6 animate-pulse" />
             </div>
             <div 
-              className="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-br from-green-400 to-blue-500 rounded-full opacity-70 blur-sm shadow-2xl hidden sm:block"
+              className="absolute -bottom-8 -left-8 w-28 h-28 bg-gradient-to-br from-green-400 to-blue-500 rounded-full opacity-70 blur-sm shadow-2xl"
               style={{
                 animation: 'float 4s ease-in-out infinite, rotate 12s linear infinite reverse',
                 animationDelay: '1s',
@@ -217,10 +213,9 @@ const About = () => {
                 transition: 'transform 0.5s ease',
               }}
             >
-              <Sparkles className="w-10 h-10 sm:w-14 sm:h-14 text-white m-auto mt-5 sm:mt-7 animate-spin-slow" />
+              <Sparkles className="w-14 h-14 text-white m-auto mt-7 animate-spin-slow" />
             </div>
             
-            {/* Particelle animate attorno all'immagine */}
             {isImageHovered && (
               <div className="absolute inset-0 pointer-events-none">
                 {[...Array(15)].map((_, i) => (
