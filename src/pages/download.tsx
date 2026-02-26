@@ -1,4 +1,11 @@
-export default function DownloadPage() {
+import fs from "fs";
+import path from "path";
+
+interface Props {
+  files: string[];
+}
+
+export default function DownloadPage({ files }: Props) {
   return (
     <div style={styles.container}>
       <h1 style={styles.title}>Nexivo Server Panel</h1>
@@ -8,27 +15,43 @@ export default function DownloadPage() {
         discord: @fixpulol
       </p>
 
-      <div style={styles.card}>
-        <a
-          href="/files/manuale.pdf"
-          download
-          style={styles.button}
-        >
-          Scarica manuale.pdf
-        </a>
-      </div>
+      <div style={styles.list}>
+        {files.length === 0 && (
+          <p style={{ opacity: 0.6 }}>Nessun file disponibile</p>
+        )}
 
-      <div style={styles.card}>
-        <a
-          href="/files/archivio.zip"
-          download
-          style={styles.button}
-        >
-          Scarica archivio.zip
-        </a>
+        {files.map((file) => (
+          <div key={file} style={styles.card}>
+            <a
+              href={`/files/${file}`}
+              download
+              style={styles.button}
+            >
+              Scarica {file}
+            </a>
+          </div>
+        ))}
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const filesDirectory = path.join(process.cwd(), "public/files");
+
+  let files: string[] = [];
+
+  try {
+    files = fs.readdirSync(filesDirectory);
+  } catch (error) {
+    console.log("Cartella files non trovata");
+  }
+
+  return {
+    props: {
+      files,
+    },
+  };
 }
 
 const styles = {
@@ -38,26 +61,32 @@ const styles = {
     color: "white",
     textAlign: "center" as const,
     paddingTop: "80px",
-    fontFamily: "Arial"
+    fontFamily: "Arial, sans-serif"
   },
   title: {
-    fontSize: "40px",
+    fontSize: "42px",
     marginBottom: "10px"
   },
   subtitle: {
-    opacity: 0.7,
+    opacity: 0.6,
     marginBottom: "40px"
+  },
+  list: {
+    display: "flex",
+    flexDirection: "column" as const,
+    alignItems: "center"
   },
   card: {
     marginBottom: "20px"
   },
   button: {
     backgroundColor: "#2563eb",
-    padding: "15px 30px",
-    borderRadius: "8px",
+    padding: "15px 40px",
+    borderRadius: "10px",
     color: "white",
     textDecoration: "none",
     fontSize: "18px",
-    display: "inline-block"
+    display: "inline-block",
+    boxShadow: "0 5px 15px rgba(0,0,0,0.3)"
   }
 };
