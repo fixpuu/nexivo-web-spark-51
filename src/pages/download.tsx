@@ -16,17 +16,11 @@ export default function DownloadPage({ files }: Props) {
       </p>
 
       <div style={styles.list}>
-        {files.length === 0 && (
-          <p style={{ opacity: 0.6 }}>Nessun file disponibile</p>
-        )}
+        {files.length === 0 && <p style={{ opacity: 0.6 }}>Nessun file disponibile</p>}
 
         {files.map((file) => (
           <div key={file} style={styles.card}>
-            <a
-              href={`/files/${file}`}
-              download
-              style={styles.button}
-            >
+            <a href={`/files/${file}`} download style={styles.button}>
               Scarica {file}
             </a>
           </div>
@@ -40,18 +34,13 @@ export async function getServerSideProps() {
   const filesDirectory = path.join(process.cwd(), "public/files");
 
   let files: string[] = [];
-
   try {
     files = fs.readdirSync(filesDirectory);
   } catch (error) {
-    console.log("Cartella files non trovata");
+    console.log("Cartella /public/files non trovata o vuota");
   }
 
-  return {
-    props: {
-      files,
-    },
-  };
+  return { props: { files } };
 }
 
 const styles = {
@@ -61,24 +50,12 @@ const styles = {
     color: "white",
     textAlign: "center" as const,
     paddingTop: "80px",
-    fontFamily: "Arial, sans-serif"
+    fontFamily: "Arial, sans-serif",
   },
-  title: {
-    fontSize: "42px",
-    marginBottom: "10px"
-  },
-  subtitle: {
-    opacity: 0.6,
-    marginBottom: "40px"
-  },
-  list: {
-    display: "flex",
-    flexDirection: "column" as const,
-    alignItems: "center"
-  },
-  card: {
-    marginBottom: "20px"
-  },
+  title: { fontSize: "42px", marginBottom: "10px" },
+  subtitle: { opacity: 0.6, marginBottom: "40px" },
+  list: { display: "flex", flexDirection: "column" as const, alignItems: "center" },
+  card: { marginBottom: "20px" },
   button: {
     backgroundColor: "#2563eb",
     padding: "15px 40px",
@@ -87,6 +64,6 @@ const styles = {
     textDecoration: "none",
     fontSize: "18px",
     display: "inline-block",
-    boxShadow: "0 5px 15px rgba(0,0,0,0.3)"
-  }
+    boxShadow: "0 5px 15px rgba(0,0,0,0.3)",
+  },
 };
