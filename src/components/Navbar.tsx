@@ -31,26 +31,25 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
-      }`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-[#0a0a0f]/80 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.5)] border-b border-white/10' : 'bg-transparent'
+        }`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             <div className="cursor-pointer" onClick={() => scrollToSection('hero')}>
-              <img 
+              <img
                 src="/lovable-uploads/70ed5a9c-150f-4727-bd4f-9dae66aacbce.png"
                 alt="Nexivo Logo"
-                className="h-12 sm:h-16 md:h-20"
+                className="h-16 sm:h-20 md:h-28 drop-shadow-[0_0_15px_rgba(0,212,255,0.3)] transition-all duration-300 hover:scale-105"
               />
             </div>
-            
+
             {/* Desktop Menu */}
             <div className="hidden md:flex space-x-6 lg:space-x-8">
               {menuItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-nexivo-dark hover:text-nexivo-blue transition-colors duration-300 font-medium text-sm lg:text-base"
+                  className="text-gray-300 hover:text-cyan-400 hover:scale-110 transition-all duration-300 font-medium text-sm lg:text-base drop-shadow-sm"
                 >
                   {item.label}
                 </button>
@@ -59,7 +58,7 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden text-nexivo-dark p-2"
+              className="md:hidden text-gray-300 p-2 hover:text-cyan-400 transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -75,24 +74,22 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-black/50 z-40 md:hidden transition-opacity duration-300 ${
-          isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`fixed inset-0 bg-black/50 z-40 md:hidden transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
         onClick={() => setIsMobileMenuOpen(false)}
       />
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 right-0 h-full w-56 sm:w-64 bg-white shadow-2xl z-50 md:hidden transform transition-transform duration-300 ${
-          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className={`fixed top-0 right-0 h-full w-56 sm:w-64 bg-[#0a0a0f]/95 backdrop-blur-xl border-l border-white/10 shadow-2xl z-50 md:hidden transform transition-transform duration-500 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
       >
         <div className="flex flex-col p-4 sm:p-6 pt-16 sm:pt-20">
           {menuItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className="text-nexivo-dark hover:text-nexivo-blue transition-colors duration-300 font-medium py-3 sm:py-4 text-base sm:text-lg border-b border-gray-100 text-left"
+              className="text-gray-300 hover:text-cyan-400 hover:pl-2 transition-all duration-300 font-medium py-3 sm:py-4 text-base sm:text-lg border-b border-white/5 text-left"
             >
               {item.label}
             </button>

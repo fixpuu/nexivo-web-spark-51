@@ -9,7 +9,7 @@ const AnimatedText = memo(({ texts, className = '' }: { texts: string[]; classNa
 
   useEffect(() => {
     const targetText = texts[currentTextIndex];
-    
+
     const timeout = setTimeout(() => {
       if (!isDeleting) {
         if (charIndex < targetText.length) {
@@ -67,8 +67,8 @@ const Hero = () => {
   useEffect(() => {
     let ticking = false;
     let lastTime = 0;
-    const throttleDelay = 50;
-    
+    const throttleDelay = 16;
+
     const handleMouseMove = (e: MouseEvent) => {
       const now = Date.now();
       if (!ticking && now - lastTime > throttleDelay) {
@@ -80,7 +80,7 @@ const Hero = () => {
         ticking = true;
       }
     };
-    
+
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
@@ -88,14 +88,14 @@ const Hero = () => {
   useEffect(() => {
     const handleParallax = () => {
       if (!titleRef.current) return;
-      
+
       const rect = titleRef.current.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
-      
+
       const deltaX = (mousePos.x - centerX) / 50;
       const deltaY = (mousePos.y - centerY) / 50;
-      
+
       titleRef.current.style.transform = `
         perspective(1000px) 
         rotateX(${-deltaY}deg) 
@@ -147,19 +147,19 @@ const Hero = () => {
     }
 
     let lastFrameTime = 0;
-    const targetFPS = 30;
+    const targetFPS = 60;
     const frameInterval = 1000 / targetFPS;
 
     const animate = (currentTime: number) => {
       const deltaTime = currentTime - lastFrameTime;
-      
+
       if (deltaTime < frameInterval) {
         animationFrameRef.current = requestAnimationFrame(animate);
         return;
       }
-      
+
       lastFrameTime = currentTime - (deltaTime % frameInterval);
-      
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((p, i) => {
@@ -226,7 +226,7 @@ const Hero = () => {
     };
 
     window.addEventListener('resize', handleResize);
-    
+
     return () => {
       window.removeEventListener('resize', handleResize);
       if (animationFrameRef.current) {
@@ -236,15 +236,15 @@ const Hero = () => {
   }, []);
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-50 relative overflow-hidden pt-20 md:pt-0">
+    <section id="hero" className="min-h-screen flex items-center justify-center bg-transparent relative overflow-hidden pt-20 md:pt-0">
       <canvas
         ref={canvasRef}
         className="absolute inset-0 pointer-events-none"
         style={{ zIndex: 1 }}
       />
-      
+
       <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 2 }}>
-        <div 
+        <div
           className="absolute w-64 h-64 sm:w-96 sm:h-96 rounded-full opacity-20 will-change-transform"
           style={{
             background: 'linear-gradient(135deg, #1E90FF 0%, #00BFFF 100%)',
@@ -256,7 +256,7 @@ const Hero = () => {
             transition: 'transform 0.3s ease-out',
           }}
         />
-        <div 
+        <div
           className="absolute w-48 h-48 sm:w-64 sm:h-64 rounded-full opacity-20 will-change-transform"
           style={{
             background: 'linear-gradient(135deg, #FF1E90 0%, #FF00BF 100%)',
@@ -269,50 +269,42 @@ const Hero = () => {
           }}
         />
       </div>
-      
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center relative" style={{ zIndex: 10 }}>
-        <div 
-          className="animate-fade-in will-change-transform"
+        <div
+          className="animate-fade-in will-change-transform perspective-1000"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          <div className="inline-flex items-center gap-2 mb-4 sm:mb-6 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-lg rounded-full border border-blue-300/30 shadow-lg animate-bounce-in">
-            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 animate-spin-slow" />
-            <span className="text-blue-600 font-semibold text-xs sm:text-sm">✨ Web Design Professionale</span>
-            <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 animate-pulse" />
-          </div>
 
-          <h1 
+          <h1
             ref={titleRef}
-            className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 mb-3 sm:mb-6 leading-tight px-2 sm:px-4"
+            className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-white mb-3 sm:mb-6 leading-tight px-2 sm:px-4 drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]"
             style={{
               transformStyle: 'preserve-3d',
               transition: 'transform 0.1s ease-out',
             }}
           >
-            Siti web che
-            <span className="text-blue-600 block relative mt-2">
-              <AnimatedText 
+            <span className="animate-text-reveal inline-block">Siti web che</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 block relative mt-2 animate-text-reveal-delayed" style={{ filter: 'drop-shadow(0 0 20px rgba(138,43,226,0.6))' }}>
+              <AnimatedText
                 texts={animatedTexts}
                 className="inline-block"
               />
-              <div 
-                className="absolute -inset-4 bg-gradient-to-r from-blue-400/20 to-purple-400/20 blur-3xl animate-pulse-glow"
-                style={{ zIndex: -1 }}
-              />
             </span>
           </h1>
-          
-          <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-6 sm:mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed transform hover:scale-105 transition-transform duration-300 px-2 sm:px-4">
-            Ogni azienda ha una storia. Io la trasformo in un sito semplice, bello e professionale.
+
+          <p className="text-xs sm:text-base md:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed transform hover:scale-105 transition-transform duration-500 px-2 sm:px-4 animate-fade-in-delayed">
+            Ogni azienda ha una storia. Io la trasformo in un'esperienza digitale <span className="text-cyan-400 font-semibold">straordinaria</span> e <span className="text-purple-400 font-semibold">unica</span>.
           </p>
-          
+
           <button
             onClick={scrollToServizi}
-            className="group inline-flex items-center gap-2 sm:gap-3 nexivo-gradient text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-semibold nexivo-shadow hover-lift relative overflow-hidden transform hover:scale-110 transition-all duration-300"
+            className="group inline-flex items-center gap-2 sm:gap-3 nexivo-gradient text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold hover-lift relative overflow-hidden animate-bounceIn"
+            style={{ animationDelay: '0.8s' }}
           >
-            <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            
+            <span className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
             <span className="absolute inset-0 overflow-hidden">
               {[...Array(6)].map((_, i) => (
                 <span
@@ -325,7 +317,7 @@ const Hero = () => {
                 />
               ))}
             </span>
-            
+
             <span className="relative z-10 flex items-center gap-2 sm:gap-3">
               <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 animate-spin-slow" />
               <span className="hidden sm:inline">Scopri cosa offro</span>
@@ -333,13 +325,13 @@ const Hero = () => {
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-2 group-hover:scale-125 transition-all duration-300" />
             </span>
           </button>
-          
-          <div className="mt-8 sm:mt-12 md:mt-16 animate-bounce cursor-pointer" onClick={scrollToServizi}>
+
+          <div className="mt-8 sm:mt-12 animate-bounce cursor-pointer" onClick={scrollToServizi}>
             <div className="relative inline-block">
-              <ArrowDown 
-                className="w-8 h-8 sm:w-10 sm:h-10 text-primary mx-auto hover:text-accent transition-colors relative z-10"
+              <ArrowDown
+                className="w-8 h-8 sm:w-12 sm:h-12 text-cyan-400 mx-auto hover:text-purple-400 transition-colors duration-500 relative z-10"
                 style={{
-                  filter: 'drop-shadow(0 0 10px rgba(30, 144, 255, 0.5))',
+                  filter: 'drop-shadow(0 0 15px rgba(0, 212, 255, 0.8))',
                 }}
               />
               <div className="absolute inset-0 bg-blue-400 rounded-full blur-xl opacity-50 animate-ping" />

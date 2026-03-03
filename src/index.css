@@ -9,29 +9,29 @@
   }
 
   :root {
-    --background: 255 255 255;
-    --foreground: 34 34 34;
-    --card: 255 255 255;
-    --card-foreground: 34 34 34;
-    --popover: 255 255 255;
-    --popover-foreground: 34 34 34;
-    --primary: 30 144 255;
-    --primary-foreground: 255 255 255;
-    --secondary: 241 245 249;
-    --secondary-foreground: 34 34 34;
-    --muted: 248 250 252;
-    --muted-foreground: 107 114 128;
-    --accent: 241 245 249;
-    --accent-foreground: 34 34 34;
+    --background: 10 10 15;
+    --foreground: 255 255 255;
+    --card: 20 20 25;
+    --card-foreground: 255 255 255;
+    --popover: 15 15 20;
+    --popover-foreground: 255 255 255;
+    --primary: 0 212 255;
+    --primary-foreground: 0 0 0;
+    --secondary: 40 40 50;
+    --secondary-foreground: 255 255 255;
+    --muted: 30 30 40;
+    --muted-foreground: 160 160 180;
+    --accent: 138 43 226;
+    --accent-foreground: 255 255 255;
     --destructive: 239 68 68;
     --destructive-foreground: 255 255 255;
-    --border: 226 232 240;
-    --input: 226 232 240;
-    --ring: 30 144 255;
-    --radius: 0.75rem;
-    --gradient-primary: linear-gradient(135deg, #1E90FF, #0066CC);
-    --shadow-elegant: 0 10px 30px -10px rgba(30, 144, 255, 0.3);
-    --shadow-glow: 0 0 40px rgba(30, 144, 255, 0.4);
+    --border: 50 50 65;
+    --input: 50 50 65;
+    --ring: 0 212 255;
+    --radius: 1rem;
+    --gradient-primary: linear-gradient(135deg, #00D4FF, #8A2BE2, #FF1493);
+    --shadow-elegant: 0 20px 40px -10px rgba(138, 43, 226, 0.5);
+    --shadow-glow: 0 0 60px rgba(0, 212, 255, 0.6);
   }
 
   * {
@@ -39,7 +39,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-poppins;
+    @apply bg-[rgb(10,10,15)] text-[rgb(255,255,255)] font-poppins;
     overflow-x: hidden;
   }
 }
@@ -47,8 +47,8 @@
 @layer components {
   .nexivo-gradient {
     background: var(--gradient-primary);
-    background-size: 200% 200%;
-    animation: gradientShift 4s ease infinite;
+    background-size: 300% 300%;
+    animation: gradientShift 6s ease infinite;
   }
 
   .nexivo-shadow {
@@ -60,30 +60,65 @@
   }
 
   .hover-lift {
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .hover-lift:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: var(--shadow-glow);
+    transform: translateY(-12px) scale(1.05) rotateX(10deg);
+    box-shadow: var(--shadow-glow), 0 20px 40px rgba(138, 43, 226, 0.5);
   }
 
   .animate-fade-in {
-    animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: fadeInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) both;
   }
 
   .animate-fade-in-delayed {
-    animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s both;
+    animation: fadeInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
   }
 
   .animate-scale-in {
-    animation: scaleIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: scaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  
+  .animate-text-reveal {
+    display: inline-block;
+    animation: textReveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) both;
+  }
+  
+  .animate-text-reveal-delayed {
+    display: inline-block;
+    animation: textReveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) 0.6s both;
   }
 
   .glass-effect {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(20, 20, 30, 0.4);
+    backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+  
+  .glass-effect-hover {
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .glass-effect-hover:hover {
+    background: rgba(40, 40, 60, 0.5);
+    border-color: rgba(0, 212, 255, 0.5);
+    transform: translateY(-10px) rotateY(10deg) rotateX(5deg);
+    box-shadow: 0 15px 45px rgba(0, 212, 255, 0.2);
+  }
+}
+
+@keyframes textReveal {
+  0% {
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
@@ -91,14 +126,9 @@
   0% {
     background-position: 0% 50%;
   }
-  25% {
-    background-position: 100% 30%;
-  }
   50% {
-    background-position: 100% 70%;
-  }
-  75% {
-    background-position: 0% 70%;
+    background-position: 100% 50%;
+    filter: hue-rotate(30deg);
   }
   100% {
     background-position: 0% 50%;
@@ -108,57 +138,68 @@
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(60px) scale(0.9);
+    filter: blur(10px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 
 @keyframes scaleIn {
   from {
     opacity: 0;
-    transform: scale(0.9) translateY(20px);
+    transform: scale(0.7) translateY(40px);
+    filter: blur(15px);
   }
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
+    filter: blur(0);
   }
 }
 
 @keyframes slideInLeft {
   from {
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateX(-100px) rotate(-5deg);
+    filter: blur(10px);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) rotate(0);
+    filter: blur(0);
   }
 }
 
 @keyframes slideInRight {
   from {
     opacity: 0;
-    transform: translateX(50px);
+    transform: translateX(100px) rotate(5deg);
+    filter: blur(10px);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) rotate(0);
+    filter: blur(0);
   }
 }
 
 @keyframes bounceIn {
   0% {
     opacity: 0;
-    transform: scale(0.8) translateY(30px);
+    transform: scale(0.3) translateY(50px) rotateX(45deg);
   }
   50% {
-    transform: scale(1.05) translateY(-10px);
+    transform: scale(1.1) translateY(-15px) rotateX(-10deg);
+  }
+  70% {
+    transform: scale(0.95) translateY(5px);
   }
   100% {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0) rotateX(0);
   }
 }

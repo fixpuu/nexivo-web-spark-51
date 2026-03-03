@@ -26,20 +26,20 @@ const Contact = () => {
 
   const copyEmailAndNotify = (e: React.MouseEvent<HTMLButtonElement>) => {
     const email = 'nexivowebs@hotmail.com';
-    
+
     navigator.clipboard.writeText(email);
-    
+
     // Crea effetto ripple
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     const newRipple = { id: Date.now(), x, y };
-    
+
     setRipples(prev => [...prev, newRipple]);
     setTimeout(() => {
       setRipples(prev => prev.filter(r => r.id !== newRipple.id));
     }, 1000);
-    
+
     toast({
       title: "Email copiata! 📧",
       description: "nexivowebs@hotmail.com copiata negli appunti. Ti aspetto!",
@@ -47,10 +47,10 @@ const Contact = () => {
   };
 
   return (
-    <section 
+    <section
       ref={sectionRef}
-      id="contatti" 
-      className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden"
+      id="contatti"
+      className="py-12 sm:py-16 md:py-20 bg-transparent relative overflow-hidden"
     >
       {/* Animated starfield background MIGLIORATO */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -72,7 +72,7 @@ const Contact = () => {
 
       {/* Floating orbs POTENZIATI */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div 
+        <div
           className="absolute w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 rounded-full"
           style={{
             background: 'radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, transparent 70%)',
@@ -84,7 +84,7 @@ const Contact = () => {
             transition: 'transform 0.3s ease-out',
           }}
         />
-        <div 
+        <div
           className="absolute w-40 h-40 sm:w-60 sm:h-60 md:w-80 md:h-80 rounded-full"
           style={{
             background: 'radial-gradient(circle, rgba(168, 85, 247, 0.5) 0%, transparent 70%)',
@@ -96,7 +96,7 @@ const Contact = () => {
             transition: 'transform 0.3s ease-out',
           }}
         />
-        <div 
+        <div
           className="absolute w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full"
           style={{
             background: 'radial-gradient(circle, rgba(236, 72, 153, 0.4) 0%, transparent 70%)',
@@ -127,21 +127,21 @@ const Contact = () => {
             <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 animate-ping" />
           </div>
 
-          <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 transform hover:scale-105 transition-transform duration-300 px-2">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 transform hover:scale-105 transition-transform duration-300 px-2 drop-shadow-[0_0_15px_rgba(0,212,255,0.4)]">
             Hai un progetto?
-            <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mt-2 animate-gradient">
+            <span className="block bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mt-2 animate-gradient drop-shadow-md">
               Scrivimi.
             </span>
           </h2>
-          
+
           <p className="text-base sm:text-xl text-gray-300 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed transform hover:scale-105 transition-transform duration-300 px-2">
             Parlami della tua attività, ti rispondo in giornata con un'idea su misura.
           </p>
-          
+
           {/* CTA Button ULTRA POTENZIATO */}
           <div className="relative inline-block group mb-8 sm:mb-12">
-            <div 
-              className="absolute -inset-2 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full blur-2xl opacity-70 group-hover:opacity-100 transition-all duration-500 animate-pulse-glow"
+            <div
+              className="absolute -inset-2 bg-gradient-to-r from-cyan-500 via-purple-600 to-pink-600 rounded-full blur-2xl opacity-70 group-hover:opacity-100 transition-all duration-500 animate-pulse-glow"
               style={{
                 animation: isHovered ? 'rotate 2s linear infinite, pulse-glow 1.5s ease-in-out infinite' : 'pulse-glow 3s ease-in-out infinite',
               }}
@@ -150,10 +150,10 @@ const Contact = () => {
               onClick={copyEmailAndNotify}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-              className="relative inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white px-6 sm:px-8 md:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg font-semibold shadow-2xl overflow-hidden group transform hover:scale-110 transition-all duration-300"
+              className="relative inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 text-white px-6 sm:px-8 md:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl overflow-hidden group transform hover:scale-110 transition-all duration-300 border border-white/20"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-700 via-purple-700 to-pink-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
               {/* Ripple effects */}
               {ripples.map(ripple => (
                 <span
@@ -166,7 +166,7 @@ const Contact = () => {
                   }}
                 />
               ))}
-              
+
               {/* Animated background particles MIGLIORATI */}
               {isHovered && (
                 <>
@@ -183,15 +183,15 @@ const Contact = () => {
                   ))}
                 </>
               )}
-              
+
               {/* Shimmer effect */}
-              <div 
+              <div
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20"
                 style={{
                   animation: isHovered ? 'shimmer 2s ease-in-out infinite' : 'none',
                 }}
               />
-              
+
               <Mail className="w-5 h-5 sm:w-6 sm:h-6 relative z-10 group-hover:scale-110 group-hover:rotate-12 transition-transform" />
               <span className="relative z-10">Scrivimi</span>
               <Send className="w-5 h-5 sm:w-6 sm:h-6 relative z-10 group-hover:translate-x-2 group-hover:-translate-y-1 transition-transform" />
@@ -203,8 +203,9 @@ const Contact = () => {
             {[
               { value: '100%', label: 'Soddisfazione', icon: Star, color: 'from-blue-400 to-cyan-500' },
               { value: '24/72h', label: 'Consegna', icon: Heart, color: 'from-pink-400 to-rose-500' },
+              { value: '24/7', label: 'Disponibilità', icon: Sparkles, color: 'from-cyan-400 to-purple-600' },
             ].map((stat, index) => (
-              <div 
+              <div
                 key={index}
                 className="group bg-white/5 backdrop-blur-lg rounded-2xl p-4 sm:p-5 md:p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-4 hover:border-white/20 hover:shadow-2xl relative overflow-hidden"
                 style={{
@@ -212,29 +213,29 @@ const Contact = () => {
                 }}
               >
                 {/* Glow effect */}
-                <div 
+                <div
                   className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-xl`}
                 />
-                
+
                 {/* Icon animato */}
                 <div className="relative mb-2 sm:mb-3">
                   <stat.icon className="w-10 h-10 sm:w-12 sm:h-12 mx-auto text-white group-hover:scale-125 group-hover:rotate-12 transition-all duration-500" />
                   <div className="absolute inset-0 bg-white rounded-full blur-xl opacity-0 group-hover:opacity-50 animate-ping" />
                 </div>
-                
+
                 <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">
                   {stat.value}
                 </div>
                 <div className="text-xs sm:text-sm text-gray-300">{stat.label}</div>
 
                 {/* Decorative corner */}
-                <div 
+                <div
                   className={`absolute -bottom-2 -right-2 w-20 h-20 bg-gradient-to-br ${stat.color} opacity-10 group-hover:opacity-30 rounded-full blur-xl transition-all duration-500 group-hover:scale-150`}
                 />
               </div>
             ))}
           </div>
-          
+
           {/* Footer MIGLIORATO */}
           <div className="mt-10 sm:mt-16 pt-8 sm:pt-12 border-t border-white/10">
             <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">

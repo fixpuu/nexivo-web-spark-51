@@ -29,14 +29,14 @@ const About = () => {
   }, []);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
-      id="chi-sono" 
-      className="py-12 sm:py-16 md:py-20 bg-white relative overflow-hidden"
+      id="chi-sono"
+      className="py-12 sm:py-16 md:py-20 relative overflow-hidden bg-transparent"
     >
       {/* Animated background elements POTENZIATI */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div 
+        <div
           className="absolute w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 rounded-full opacity-10"
           style={{
             background: 'radial-gradient(circle, #1E90FF 0%, transparent 70%)',
@@ -47,7 +47,7 @@ const About = () => {
             animation: 'float 15s ease-in-out infinite',
           }}
         />
-        <div 
+        <div
           className="absolute w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full opacity-10"
           style={{
             background: 'radial-gradient(circle, #FF1E90 0%, transparent 70%)',
@@ -58,7 +58,7 @@ const About = () => {
             animation: 'float 18s ease-in-out infinite reverse',
           }}
         />
-        <div 
+        <div
           className="absolute w-40 h-40 sm:w-60 sm:h-60 md:w-80 md:h-80 rounded-full opacity-10"
           style={{
             background: 'radial-gradient(circle, #FFD700 0%, transparent 70%)',
@@ -82,16 +82,16 @@ const About = () => {
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="animate-fade-in text-center md:text-left">
             {/* Badge animato */}
-            <div className="inline-flex items-center gap-2 mb-4 sm:mb-6 px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-50 rounded-full border border-blue-200 animate-bounce-in">
-              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600 animate-pulse" />
-              <span className="text-blue-600 font-semibold text-xs sm:text-sm">Chi sono</span>
+            <div className="inline-flex items-center gap-2 mb-4 sm:mb-6 px-3 sm:px-4 py-1.5 sm:py-2 bg-[rgba(20,20,30,0.6)] backdrop-blur-md rounded-full border border-blue-500/30 animate-bounceIn">
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400 animate-pulse" />
+              <span className="text-cyan-400 font-semibold text-xs sm:text-sm uppercase tracking-wider">Chi sono</span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-nexivo-dark mb-4 sm:mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-white mb-4 sm:mb-6 leading-tight drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
               Una mente giovane.
-              <span className="text-nexivo-blue block relative mt-2">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 block relative mt-2">
                 Un approccio professionale.
-                <div 
+                <div
                   className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-blue-600 to-transparent"
                   style={{
                     width: '60%',
@@ -100,20 +100,20 @@ const About = () => {
                 />
               </span>
             </h2>
-            
-            <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-600 leading-relaxed">
-              <p className="transform md:hover:translate-x-2 transition-transform duration-300 hover:text-gray-900 relative group">
-                <span className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:block" />
-                Sono un web designer freelance. Aiuto piccole attività, negozi e professionisti 
+
+            <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-300 leading-relaxed">
+              <p className="transform md:hover:translate-x-2 transition-transform duration-300 hover:text-white relative group">
+                <span className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:block shadow-[0_0_10px_rgba(0,212,255,0.8)]" />
+                Sono un web designer freelance. Aiuto piccole attività, negozi e professionisti
                 a presentarsi online con un sito chiaro, moderno e su misura.
               </p>
-              
-              <p className="transform md:hover:translate-x-2 transition-transform duration-300 hover:text-gray-900 relative group">
-                <span className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:block" />
-                Ogni progetto è personalizzato e viene consegnato in pochi giorni, 
+
+              <p className="transform md:hover:translate-x-2 transition-transform duration-300 hover:text-white relative group">
+                <span className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:block shadow-[0_0_10px_rgba(138,43,226,0.8)]" />
+                Ogni progetto è personalizzato e viene consegnato in pochi giorni,
                 con supporto e trasparenza.
               </p>
-              
+
               {/* Skills badges */}
               <div className="flex flex-wrap gap-2 sm:gap-3 pt-3 sm:pt-4 justify-center md:justify-start">
                 {[
@@ -133,9 +133,9 @@ const About = () => {
                   </div>
                 ))}
               </div>
-              
+
               <div className="flex items-center justify-center md:justify-start gap-3 sm:gap-4 pt-4 sm:pt-6">
-                <div 
+                <div
                   className="relative w-12 h-12 sm:w-16 sm:h-16 nexivo-gradient rounded-full flex items-center justify-center group flex-shrink-0"
                   style={{
                     animation: 'pulse 2s ease-in-out infinite',
@@ -146,15 +146,15 @@ const About = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-300" />
                 </div>
                 <div className="transform hover:translate-x-2 transition-transform duration-300 min-w-0">
-                  <p className="font-semibold text-nexivo-dark text-base sm:text-lg">Nexivo</p>
-                  <p className="text-xs sm:text-sm text-gray-500">Web Designer Freelance</p>
+                  <p className="font-bold text-white text-base sm:text-lg tracking-wide">Nexivo</p>
+                  <p className="text-xs sm:text-sm text-cyan-400">Web Designer Freelance</p>
                 </div>
               </div>
             </div>
           </div>
-          
+
           {/* Immagine - visibile solo da tablet in su */}
-          <div 
+          <div
             className="hidden md:block animate-scale-in relative group"
             style={{
               transform: `translateX(${scrollY * 0.05}px) perspective(1000px) rotateY(${scrollY * 0.02}deg)`,
@@ -163,10 +163,10 @@ const About = () => {
             onMouseEnter={() => setIsImageHovered(true)}
             onMouseLeave={() => setIsImageHovered(false)}
           >
-            <div className="absolute -inset-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur-3xl opacity-20 group-hover:opacity-50 transition-opacity duration-500" />
-            
+            <div className="absolute -inset-6 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl blur-3xl opacity-30 group-hover:opacity-70 transition-opacity duration-500" />
+
             <div className="relative overflow-hidden rounded-2xl">
-              <img 
+              <img
                 src="/lovable-uploads/a09c768e-c145-4d1f-aa92-f10525a22e3e.png"
                 alt="Web development workspace"
                 className="rounded-2xl shadow-2xl w-full hover-lift relative z-10 transition-all duration-700"
@@ -175,8 +175,8 @@ const About = () => {
                   transform: isImageHovered ? 'scale(1.05) rotateZ(2deg)' : 'scale(1) rotateZ(0deg)',
                 }}
               />
-              
-              <div 
+
+              <div
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 pointer-events-none"
                 style={{
                   animation: isImageHovered ? 'shimmer 2s ease-in-out infinite' : 'none',
@@ -187,8 +187,8 @@ const About = () => {
                 <div className="absolute inset-0 border-4 border-blue-400/50 rounded-2xl animate-border-glow" />
               )}
             </div>
-            
-            <div 
+
+            <div
               className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl opacity-80 blur-sm shadow-2xl"
               style={{
                 animation: 'float 3s ease-in-out infinite, rotate 10s linear infinite',
@@ -198,7 +198,7 @@ const About = () => {
             >
               <Zap className="w-12 h-12 text-white m-auto mt-6 animate-pulse" />
             </div>
-            <div 
+            <div
               className="absolute -bottom-8 -left-8 w-28 h-28 bg-gradient-to-br from-green-400 to-blue-500 rounded-full opacity-70 blur-sm shadow-2xl"
               style={{
                 animation: 'float 4s ease-in-out infinite, rotate 12s linear infinite reverse',
@@ -209,7 +209,7 @@ const About = () => {
             >
               <Sparkles className="w-14 h-14 text-white m-auto mt-7 animate-spin-slow" />
             </div>
-            
+
             {isImageHovered && (
               <div className="absolute inset-0 pointer-events-none">
                 {[...Array(15)].map((_, i) => (
