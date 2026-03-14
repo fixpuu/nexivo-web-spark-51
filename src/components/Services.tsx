@@ -1,302 +1,98 @@
-import { Monitor, FileText, Globe, Sparkles } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
+import { Monitor, FileText, Globe, Server, Terminal } from 'lucide-react';
 
 const Services = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        setMousePosition({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top,
-        });
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   const services = [
     {
       icon: Monitor,
       title: 'Design su misura',
-      description: 'Layout personalizzati e compatibili con ogni dispositivo. Design unico che rispecchia la tua identità aziendale.',
-      color: 'from-blue-500 to-cyan-500',
-      accentColor: '#1E90FF',
-      delay: 0,
-      features: ['Responsive Design', 'UI/UX Professionale', 'Brand Identity']
+      description: 'Layout personalizzati, moderni e completamente responsivi. Design unico che rispecchia la tua identità e converte gli utenti.',
+      color: 'text-cyan-400',
+      bgFade: 'from-cyan-500/10 to-transparent',
+      borderGlow: 'group-hover:border-cyan-500/50',
+      features: ['UI/UX Professionale', 'Mobile First', 'Brand Identity']
     },
     {
       icon: FileText,
       title: 'Contenuti inclusi',
-      description: 'Inserisco testi, immagini, logo e tutto il necessario per rendere il tuo sito completo e professionale.',
-      color: 'from-purple-500 to-pink-500',
-      accentColor: '#9333EA',
-      delay: 200,
-      features: ['Copywriting', 'Ottimizzazione SEO', 'Media Management']
+      description: 'Inserisco testi, immagini, logo e tutto il necessario per rendere il tuo sito completo, veloce e subito pronto al lancio.',
+      color: 'text-purple-400',
+      bgFade: 'from-purple-500/10 to-transparent',
+      borderGlow: 'group-hover:border-purple-500/50',
+      features: ['Copy basic', 'Ottimizzazione Assets', 'SEO Friendly']
     },
     {
       icon: Globe,
       title: 'Pubblicazione online',
-      description: 'Ti aiuto a mettere online il sito con il tuo dominio. Supporto completo dalla creazione alla pubblicazione.',
-      color: 'from-orange-500 to-red-500',
-      accentColor: '#F97316',
-      delay: 400,
-      features: ['Hosting Setup', 'Domain Configuration', 'SSL Certificate']
+      description: 'Ti aiuto a mettere online il sito sul tuo dominio. Gestione hosting, configurazione DNS e certificati di sicurezza.',
+      color: 'text-emerald-400',
+      bgFade: 'from-emerald-500/10 to-transparent',
+      borderGlow: 'group-hover:border-emerald-500/50',
+      features: ['Hosting Setup', 'SSL Certificate', 'Dominio personalizzato']
     }
   ];
 
   return (
-    <section id="servizi" className="py-12 sm:py-16 md:py-20 relative overflow-hidden bg-transparent">
-      {/* Animated grid background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(0, 212, 255, 0.15) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(138, 43, 226, 0.15) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px',
-            animation: 'gridScroll 20s linear infinite',
-          }}
-        />
-      </div>
+    <section id="servizi" className="py-20 sm:py-28 relative bg-[#050508] border-y border-gray-900">
 
-      {/* Floating orbs interattivi */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full opacity-20 blur-3xl"
-            style={{
-              background: `radial-gradient(circle, ${services[i % 3].accentColor}40 0%, transparent 70%)`,
-              top: `${20 + i * 15}%`,
-              left: `${10 + i * 20}%`,
-              animation: `float ${8 + i * 2}s ease-in-out infinite`,
-              animationDelay: `${i * 0.5}s`,
-              transform: `translate(${mousePosition.x * 0.01 * (i + 1)}px, ${mousePosition.y * 0.01 * (i + 1)}px)`,
-              transition: 'transform 0.3s ease-out',
-            }}
-          />
-        ))}
-      </div>
+      {/* Background patterns */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-900/40 via-[#050508] to-[#050508] pointer-events-none" />
 
-      <div ref={containerRef} className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="text-center mb-10 sm:mb-16 animate-fade-in">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 mb-3 sm:mb-4 px-3 sm:px-4 py-1.5 sm:py-2 bg-[rgba(20,20,30,0.6)] backdrop-blur-md rounded-full border border-purple-500/30">
-            <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400 animate-pulse" />
-            <span className="text-purple-400 font-semibold text-xs sm:text-sm uppercase tracking-wider">I miei servizi</span>
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 relative z-10">
+        <div className="text-center mb-16 sm:mb-24">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-900/80 border border-gray-800 rounded-full mb-6 text-sm text-gray-400 font-mono">
+            <Server className="w-4 h-4 text-cyan-400" />
+            <span>sys.services.load()</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-white mb-4 sm:mb-6 transform hover:scale-105 transition-transform duration-300 px-2 drop-shadow-[0_0_20px_rgba(138,43,226,0.3)]">
-            Cosa offro
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight">
+            I miei <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-500">servizi</span>
           </h2>
-          <p className="text-base sm:text-xl text-gray-300 max-w-2xl mx-auto px-2 font-light">
-            Servizi completi per la tua presenza online, progettati per stupire e convertire
+          <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
+            Soluzioni complete, performanti e scalabili per la tua presenza online.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, index) => (
             <div
               key={index}
-              className="relative group"
-              style={{
-                animationDelay: `${service.delay}ms`,
-              }}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              className={`group relative bg-[#0a0a0f] border border-gray-800 rounded-2xl p-8 overflow-hidden transition-all duration-300 ${service.borderGlow} hover:-translate-y-2 hover:shadow-2xl`}
             >
-              {/* 3D Card effect avanzato */}
-              <div
-                className="glass-effect glass-effect-hover p-5 sm:p-6 md:p-8 rounded-3xl transition-all duration-700 relative overflow-hidden"
-                style={{
-                  transform: hoveredIndex === index
-                    ? 'translateY(-20px) rotateX(15deg) rotateY(10deg) scale(1.05)'
-                    : 'translateY(0) rotateX(0) rotateY(0) scale(1)',
-                  transformStyle: 'preserve-3d',
-                  perspective: '1500px',
-                }}
-              >
-                {/* Glow effect multiplo */}
-                <div
-                  className={`absolute -inset-0.5 bg-gradient-to-r ${service.color} rounded-2xl blur-xl opacity-0 group-hover:opacity-70 transition-opacity duration-500`}
-                  style={{ zIndex: -1 }}
-                />
+              <div className={`absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b ${service.bgFade} opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`} />
 
-                {/* Particelle animate all'hover */}
-                {hoveredIndex === index && (
-                  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    {[...Array(15)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="absolute w-1 h-1 bg-white rounded-full animate-particle-float"
-                        style={{
-                          left: `${Math.random() * 100}%`,
-                          top: `${Math.random() * 100}%`,
-                          animationDelay: `${Math.random() * 2}s`,
-                          animationDuration: `${2 + Math.random() * 2}s`,
-                        }}
-                      />
-                    ))}
-                  </div>
-                )}
-
-                {/* Icon container con effetto 3D avanzato */}
-                <div
-                  className={`w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 relative overflow-hidden bg-gradient-to-r ${service.color} shadow-2xl`}
-                  style={{
-                    transform: hoveredIndex === index ? 'translateZ(80px) rotateY(360deg) scale(1.2)' : 'translateZ(0) rotateY(0deg) scale(1)',
-                    transition: 'transform 1s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                  }}
-                >
-                  <service.icon className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white relative z-10" />
-
-                  {/* Effetto shimmer */}
-                  <div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30"
-                    style={{
-                      animation: hoveredIndex === index ? 'shimmer 2s ease-in-out infinite' : 'none',
-                    }}
-                  />
-
-                  {/* Particles nel cerchio */}
-                  {hoveredIndex === index && (
-                    <>
-                      {[...Array(8)].map((_, i) => (
-                        <div
-                          key={i}
-                          className="absolute w-2 h-2 bg-white rounded-full opacity-80"
-                          style={{
-                            animation: `particle${(i % 3) + 1} ${1 + Math.random() * 0.5}s ease-out infinite`,
-                            animationDelay: `${i * 0.15}s`,
-                          }}
-                        />
-                      ))}
-                    </>
-                  )}
+              <div className="relative z-10">
+                <div className={`w-14 h-14 rounded-xl bg-gray-900 flex items-center justify-center mb-6 border border-gray-800 ${service.color}`}>
+                  <service.icon className="w-7 h-7" />
                 </div>
 
-                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-3 sm:mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-500 transition-all duration-300">
+                <h3 className="text-2xl font-bold text-gray-100 mb-4 tracking-tight">
                   {service.title}
                 </h3>
 
-                <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-4 sm:mb-6 group-hover:text-gray-200 transition-colors">
+                <p className="text-gray-400 mb-8 leading-relaxed">
                   {service.description}
                 </p>
 
-                {/* Features list */}
-                <ul className="space-y-2">
+                <div className="space-y-3">
                   {service.features.map((feature, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center gap-2 text-sm text-gray-400 transform transition-all duration-300 font-medium"
-                      style={{
-                        opacity: hoveredIndex === index ? 1 : 0.7,
-                        transform: hoveredIndex === index ? `translateX(${i * 8}px)` : 'translateX(0)',
-                        color: hoveredIndex === index ? '#fff' : '',
-                        transitionDelay: `${i * 50}ms`,
-                      }}
-                    >
-                      <div className={`w-2 h-2 rounded-full shadow-[0_0_10px_${service.accentColor}] bg-gradient-to-r ${service.color}`} />
-                      {feature}
-                    </li>
+                    <div key={i} className="flex items-center gap-3 text-sm text-gray-500 group-hover:text-gray-300 transition-colors">
+                      <Terminal className={`w-4 h-4 ${service.color}`} />
+                      <span>{feature}</span>
+                    </div>
                   ))}
-                </ul>
-
-                {/* Decorative corner elements animati */}
-                <div
-                  className="absolute top-0 right-0 w-32 h-32 opacity-10 transition-all duration-500"
-                  style={{
-                    background: `linear-gradient(135deg, transparent 50%, ${service.accentColor} 50%)`,
-                    transform: hoveredIndex === index ? 'scale(2) rotate(90deg)' : 'scale(1) rotate(0deg)',
-                  }}
-                />
-
-                {/* Linea di luce animata */}
-                {hoveredIndex === index && (
-                  <div
-                    className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r opacity-70"
-                    style={{
-                      backgroundImage: `linear-gradient(to right, transparent, ${service.accentColor}, transparent)`,
-                      animation: 'slideLight 2s ease-in-out infinite',
-                    }}
-                  />
-                )}
+                </div>
               </div>
 
-              {/* Shadow 3D sotto la card */}
-              <div
-                className="absolute -bottom-4 left-4 right-4 h-4 bg-gray-900 rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500"
-                style={{
-                  transform: hoveredIndex === index ? 'scale(1.2)' : 'scale(1)',
-                  transition: 'all 0.5s ease',
-                }}
-              />
+              {/* Decorative pseudo-terminal dots */}
+              <div className="absolute top-4 right-4 flex gap-1.5 opacity-30">
+                <div className="w-2 h-2 rounded-full bg-red-500" />
+                <div className="w-2 h-2 rounded-full bg-yellow-500" />
+                <div className="w-2 h-2 rounded-full bg-green-500" />
+              </div>
             </div>
           ))}
         </div>
       </div>
-
-      <style>{`
-        @keyframes gridScroll {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(50px); }
-        }
-        
-        @keyframes particle1 {
-          0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
-          100% { transform: translate(25px, -30px) scale(0); opacity: 0; }
-        }
-        
-        @keyframes particle2 {
-          0% { transform: translate(0, 0) scale(1); opacity: 0.6; }
-          100% { transform: translate(-20px, -35px) scale(0); opacity: 0; }
-        }
-        
-        @keyframes particle3 {
-          0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
-          100% { transform: translate(15px, -40px) scale(0); opacity: 0; }
-        }
-
-        @keyframes particle-float {
-          0%, 100% { 
-            transform: translate(0, 0) scale(0); 
-            opacity: 0; 
-          }
-          50% { 
-            transform: translate(calc(var(--random-x, 0) * 50px), calc(var(--random-y, 0) * -50px)) scale(1); 
-            opacity: 1; 
-          }
-        }
-
-        @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-
-        @keyframes slideLight {
-          0%, 100% { transform: translateX(-100%); }
-          50% { transform: translateX(100%); }
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-
-        .animate-particle-float {
-          --random-x: ${Math.random()};
-          --random-y: ${Math.random()};
-        }
-      `}</style>
     </section>
   );
 };

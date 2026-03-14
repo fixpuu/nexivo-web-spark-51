@@ -4,12 +4,23 @@ import { Menu, X } from 'lucide-react';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      // Calculate scroll progress percentage
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      setScrollProgress(scrolled);
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Initial check
+    handleScroll();
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -31,9 +42,17 @@ const Navbar = () => {
 
   return (
     <>
+      {/* Scroll Progress Bar at the very top */}
+      <div className="fixed top-0 left-0 w-full h-[3px] sm:h-1 z-[100] bg-gray-900/50">
+        <div
+          className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-r-full shadow-[0_0_10px_rgba(6,182,212,0.5)]"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
+
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-[#0a0a0f]/80 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.5)] border-b border-white/10' : 'bg-transparent'
         }`}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 mt-1">
           <div className="flex items-center justify-between">
             <div className="cursor-pointer" onClick={() => scrollToSection('hero')}>
               <img

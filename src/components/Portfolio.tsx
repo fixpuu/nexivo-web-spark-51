@@ -1,273 +1,124 @@
-import { useState, useRef, useEffect } from 'react';
-import { ExternalLink, Sparkles, Zap, Star } from 'lucide-react';
+import { ExternalLink, Terminal, Code, Cpu } from 'lucide-react';
 
 const Portfolio = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [rotation, setRotation] = useState({ x: 0, y: 0 });
-  const cardRef = useRef<HTMLDivElement>(null);
-
   const projects = [
     {
       title: 'Giogioxii.com',
-      description: 'Sito web per content creator gaming con design moderno e community digitale',
+      description: 'Sito web per content creator gaming con design moderno e community digitale.',
       image: '/lovable-uploads/e48f6d34-36da-48df-937b-a7c72334c9d0.png',
-      tags: ['Gaming', 'Content Creator', 'Community'],
+      tags: ['React', 'Tailwind', 'Motion'],
       url: 'https://giogioxii.com',
-      gradient: 'from-purple-600 via-pink-600 to-red-600',
       stats: [
-        { label: 'Design Pages', value: '8+' },
-        { label: 'Load Time', value: '<2s' },
-        { label: 'Performance', value: '95+' }
+        { label: 'Pages', value: '8+' },
+        { label: 'Load', value: '<1s' },
+        { label: 'Score', value: '98' }
       ]
     }
   ];
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (cardRef.current) {
-        const rect = cardRef.current.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        setMousePosition({ x, y });
-
-        // Calcola rotazione 3D basata sulla posizione del mouse
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -15; // Invertito per effetto naturale
-        const rotateY = ((x - centerX) / centerX) * 15;
-
-        setRotation({ x: rotateX, y: rotateY });
-      }
-    };
-
-    const card = cardRef.current;
-    if (card) {
-      card.addEventListener('mousemove', handleMouseMove);
-      return () => card.removeEventListener('mousemove', handleMouseMove);
-    }
-  }, []);
-
   return (
-    <section id="portfolio" className="py-12 sm:py-16 md:py-20 bg-transparent relative overflow-hidden">
-      {/* Animated background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          className="absolute w-full h-full"
-          style={{
-            background: 'radial-gradient(circle at 20% 50%, rgba(147, 51, 234, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(236, 72, 153, 0.08) 0%, transparent 50%)',
-            animation: 'pulse 8s ease-in-out infinite',
-          }}
-        />
+    <section id="portfolio" className="py-20 sm:py-28 relative bg-[#0a0a0f]">
 
-        {/* Floating shapes */}
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-float"
-            style={{
-              width: `${Math.min(100 + i * 30, 220)}px`,
-              height: `${Math.min(100 + i * 30, 220)}px`,
-              background: `linear-gradient(135deg, ${i % 2 === 0 ? '#8b5cf6' : '#ec4899'}, transparent)`,
-              left: `${10 + i * 15}%`,
-              top: `${20 + i * 10}%`,
-              animationDelay: `${i * 0.7}s`,
-              animationDuration: `${10 + i * 2}s`,
-            }}
-          />
-        ))}
-      </div>
+      {/* Background elements */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-pink-500/5 via-[#0a0a0f] to-[#0a0a0f] pointer-events-none" />
+      <div className="absolute right-0 top-1/4 w-96 h-96 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(168,85,247,0.1) 0%, transparent 70%)' }} />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="text-center mb-10 sm:mb-16 animate-fade-in">
-          <div className="inline-flex items-center gap-2 mb-3 sm:mb-4 px-3 sm:px-4 py-1.5 sm:py-2 bg-[rgba(20,20,30,0.6)] backdrop-blur-md rounded-full border border-pink-500/30 animate-bounceIn">
-            <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-pink-400 animate-spin-slow" />
-            <span className="text-pink-400 font-semibold text-xs sm:text-sm uppercase tracking-wider">Portfolio</span>
-            <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400 animate-pulse" />
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 relative z-10">
+
+        {/* Section Header */}
+        <div className="text-center mb-16 sm:mb-24">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-900 border border-gray-800 rounded-full mb-6">
+            <Cpu className="w-4 h-4 text-pink-400" />
+            <span className="text-pink-400 font-mono text-sm">/var/www/projects</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-white mb-4 sm:mb-6 transform hover:scale-105 transition-transform duration-300 px-2 drop-shadow-[0_0_20px_rgba(236,72,153,0.3)]">
-            I miei progetti
+
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight">
+            I miei <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500">lavori</span>
           </h2>
-          <p className="text-base sm:text-xl text-gray-300 max-w-2xl mx-auto px-2 font-light">
-            Esempi dei miei lavori web più recenti
+          <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
+            Progetti sviluppati con codice pulito, alte performance e design curato nel minimo dettaglio.
           </p>
         </div>
 
+        {/* Projects Grid */}
         <div className="flex justify-center">
           {projects.map((project, index) => (
-            <div
-              key={index}
-              ref={cardRef}
-              className="group cursor-pointer animate-scale-in max-w-2xl w-full"
-              style={{
-                animationDelay: `${index * 0.2}s`,
-                perspective: '1500px',
-              }}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => {
-                setIsHovered(false);
-                setRotation({ x: 0, y: 0 });
-              }}
-            >
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <div
-                  className="relative overflow-hidden rounded-3xl shadow-2xl transition-all duration-700"
-                  style={{
-                    transform: isHovered
-                      ? `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale(1.05) translateZ(50px)`
-                      : 'rotateX(0deg) rotateY(0deg) scale(1) translateZ(0px)',
-                    transformStyle: 'preserve-3d',
-                  }}
-                >
-                  {/* Gradient border effect multiplo */}
-                  <div
-                    className={`absolute -inset-2 bg-gradient-to-r ${project.gradient} rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700`}
-                    style={{
-                      animation: isHovered ? 'rotate 4s linear infinite' : 'none',
-                    }}
-                  />
+            <div key={index} className="w-full max-w-4xl group">
+              <a href={project.url} target="_blank" rel="noopener noreferrer" className="block">
 
-                  {/* Spotlight effect che segue il mouse */}
-                  {isHovered && (
-                    <div
-                      className="absolute inset-0 z-10 pointer-events-none"
-                      style={{
-                        background: `radial-gradient(circle 200px at ${mousePosition.x}px ${mousePosition.y}px, rgba(236,72,153,0.3), transparent)`,
-                      }}
-                    />
-                  )}
+                {/* Project Card */}
+                <div className="bg-[#12121a] border border-gray-800 rounded-2xl overflow-hidden hover:border-pink-500/50 transition-colors duration-500 shadow-2xl relative">
 
-                  <div className="relative glass-effect rounded-3xl overflow-hidden" style={{ transformStyle: 'preserve-3d' }}>
-                    {/* Image container con effetto 3D avanzato */}
-                    <div className="relative overflow-hidden h-48 sm:h-64 md:h-96">
+                  {/* Subtle top glare */}
+                  <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-pink-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  <div className="grid md:grid-cols-2">
+
+                    {/* Visual Side (Mockup/Image) */}
+                    <div className="relative aspect-video md:aspect-auto overflow-hidden bg-gray-900 border-b md:border-b-0 md:border-r border-gray-800">
+                      {/* Overlay gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-pink-500/20 to-purple-500/20 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover transition-all duration-700"
-                        style={{
-                          transform: isHovered ? 'scale(1.15) rotate(3deg)' : 'scale(1) rotate(0deg)',
-                          filter: isHovered ? 'brightness(0.85) saturate(1.2)' : 'brightness(1) saturate(1)',
-                        }}
+                        className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
                       />
 
-                      {/* Particelle animate sull'immagine */}
-                      {isHovered && (
-                        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                          {[...Array(20)].map((_, i) => (
-                            <div
-                              key={i}
-                              className="absolute w-2 h-2 bg-white rounded-full animate-sparkle"
-                              style={{
-                                left: `${Math.random() * 100}%`,
-                                top: `${Math.random() * 100}%`,
-                                animationDelay: `${Math.random() * 2}s`,
-                                animationDuration: `${1.5 + Math.random()}s`,
-                              }}
-                            />
+                      {/* Floating terminal snippet */}
+                      <div className="absolute bottom-4 left-4 z-20 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 mix-blend-luminosity">
+                        <div className="px-3 py-1.5 bg-black/80 backdrop-blur border border-gray-800 rounded font-mono text-xs text-pink-400 flex items-center gap-2">
+                          <Terminal className="w-3 h-3" /> Deployed successfully
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Content Side */}
+                    <div className="p-8 sm:p-10 flex flex-col justify-center relative">
+                      {/* Deco element */}
+                      <div className="absolute top-0 right-0 w-32 h-32 rounded-full transition-colors group-hover:opacity-100 opacity-60" style={{ background: 'radial-gradient(circle, rgba(236,72,153,0.1) 0%, transparent 70%)' }} />
+
+                      <div className="relative z-10">
+                        <h3 className="text-3xl font-bold text-white mb-4 group-hover:text-pink-400 transition-colors">
+                          {project.title}
+                        </h3>
+
+                        <p className="text-gray-400 leading-relaxed mb-6">
+                          {project.description}
+                        </p>
+
+                        {/* Tech Stack Tags */}
+                        <div className="flex flex-wrap gap-2 mb-8">
+                          {project.tags.map((tag, tagIdx) => (
+                            <span
+                              key={tagIdx}
+                              className="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 text-xs font-mono rounded-md flex items-center gap-1.5"
+                            >
+                              <Code className="w-3 h-3 text-pink-500" /> {tag}
+                            </span>
                           ))}
                         </div>
-                      )}
 
-                      {/* Overlay con content */}
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-t ${project.gradient} transition-all duration-700 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 text-white`}
-                        style={{
-                          opacity: isHovered ? 0.97 : 0,
-                          transform: isHovered ? 'translateZ(100px)' : 'translateZ(0px)',
-                        }}
-                      >
-                        <div
-                          className="transform transition-all duration-700"
-                          style={{
-                            transform: isHovered ? 'translateY(0) scale(1) translateZ(50px)' : 'translateY(30px) scale(0.9) translateZ(0px)',
-                            opacity: isHovered ? 1 : 0,
-                            transformStyle: 'preserve-3d',
-                          }}
-                        >
-                          {/* Icon animato */}
-                          <div className="mb-3 sm:mb-6 relative">
-                            <ExternalLink className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 mx-auto animate-bounce-gentle" />
-                            <div className="absolute inset-0 bg-white rounded-full blur-xl opacity-30 animate-ping" />
-                          </div>
+                        {/* Stats & Action */}
+                        <div className="flex items-end justify-between mt-auto">
 
-                          <h3 className="text-xl sm:text-2xl md:text-4xl font-bold mb-2 sm:mb-4 drop-shadow-lg">
-                            {project.title}
-                          </h3>
-                          <p className="text-sm sm:text-base md:text-xl mb-3 sm:mb-6 text-white/95 drop-shadow-md">
-                            {project.description}
-                          </p>
-
-                          {/* Stats animati */}
-                          <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-3 sm:mb-6">
+                          <div className="flex gap-6">
                             {project.stats.map((stat, i) => (
-                              <div
-                                key={i}
-                                className="text-center transform transition-all duration-500"
-                                style={{
-                                  transitionDelay: `${i * 100}ms`,
-                                  transform: isHovered ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.8)',
-                                }}
-                              >
-                                <div className="text-base sm:text-xl md:text-2xl font-bold">{stat.value}</div>
-                                <div className="text-[10px] sm:text-xs opacity-90">{stat.label}</div>
+                              <div key={i}>
+                                <div className="text-xl font-bold text-white mb-0.5">{stat.value}</div>
+                                <div className="text-xs text-gray-500 uppercase tracking-wider">{stat.label}</div>
                               </div>
                             ))}
                           </div>
 
-                          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-white/20 backdrop-blur-lg rounded-full border-2 border-white/40 text-sm sm:text-base font-semibold hover:bg-white/30 transition-all duration-300 shadow-2xl group-hover:scale-110">
-                            <Zap className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
-                            <span>Visita il sito</span>
-                            <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-2 transition-transform" />
+                          <div className="w-12 h-12 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-500 group-hover:bg-pink-500 group-hover:text-white transition-all duration-300 transform group-hover:rotate-12">
+                            <ExternalLink className="w-5 h-5" />
                           </div>
+
                         </div>
                       </div>
-
-                      {/* Border glow animato */}
-                      {isHovered && (
-                        <div className="absolute inset-0 border-4 border-white/30 rounded-t-3xl animate-border-glow" />
-                      )}
                     </div>
 
-                    {/* Project info */}
-                    <div className="p-5 sm:p-6 md:p-8 relative" style={{ transform: 'translateZ(20px)' }}>
-                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-500 transition-all duration-300 drop-shadow-md">
-                        {project.title}
-                      </h3>
-                      <p className="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4 group-hover:text-white transition-colors">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                        {project.tags.map((tag, tagIndex) => (
-                          <span
-                            key={tagIndex}
-                            className={`px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r ${project.gradient} text-white text-xs sm:text-sm font-medium rounded-full shadow-lg transform transition-all duration-300 hover:scale-110 hover:shadow-xl`}
-                            style={{
-                              transform: isHovered ? `translateY(-5px) rotate(${(tagIndex - 1) * 5}deg)` : 'translateY(0) rotate(0deg)',
-                              transitionDelay: `${tagIndex * 50}ms`,
-                            }}
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Decorative elements */}
-                      <div className="absolute -bottom-2 -right-2 w-32 h-32 opacity-10">
-                        <div
-                          className={`w-full h-full rounded-full bg-gradient-to-br ${project.gradient}`}
-                          style={{
-                            transform: isHovered ? 'scale(1.5) rotate(180deg)' : 'scale(1) rotate(0deg)',
-                            transition: 'transform 0.8s ease',
-                          }}
-                        />
-                      </div>
-                    </div>
                   </div>
                 </div>
               </a>
@@ -275,80 +126,6 @@ const Portfolio = () => {
           ))}
         </div>
       </div>
-
-      <style>{`
-        @keyframes rotate {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) translateX(0px); }
-          25% { transform: translateY(-20px) translateX(10px); }
-          50% { transform: translateY(0px) translateX(20px); }
-          75% { transform: translateY(-15px) translateX(10px); }
-        }
-
-        @keyframes sparkle {
-          0%, 100% { 
-            opacity: 0;
-            transform: scale(0) translateY(0); 
-          }
-          50% { 
-            opacity: 1;
-            transform: scale(1.5) translateY(-20px); 
-          }
-        }
-
-        @keyframes bounce-gentle {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-
-        @keyframes border-glow {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 0.8; }
-        }
-
-        @keyframes bounce-in {
-          0% {
-            opacity: 0;
-            transform: scale(0.3) translateY(-20px);
-          }
-          50% {
-            transform: scale(1.05) translateY(5px);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-          }
-        }
-
-        .animate-sparkle {
-          animation: sparkle 2s ease-in-out infinite;
-        }
-
-        .animate-bounce-gentle {
-          animation: bounce-gentle 2s ease-in-out infinite;
-        }
-
-        .animate-spin-slow {
-          animation: spin-slow 3s linear infinite;
-        }
-
-        .animate-border-glow {
-          animation: border-glow 2s ease-in-out infinite;
-        }
-
-        .animate-bounce-in {
-          animation: bounce-in 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
-        }
-      `}</style>
     </section>
   );
 };

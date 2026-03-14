@@ -1,321 +1,114 @@
-import { useState, useEffect, useRef } from 'react';
-import { Sparkles, Zap, Code, Palette } from 'lucide-react';
+import { Code, Terminal, Layout, Layers, MonitorSmartphone } from 'lucide-react';
 
 const About = () => {
-  const [scrollY, setScrollY] = useState(0);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isImageHovered, setIsImageHovered] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (sectionRef.current) {
-        const rect = sectionRef.current.getBoundingClientRect();
-        setMousePosition({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top,
-        });
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
-    <section
-      ref={sectionRef}
-      id="chi-sono"
-      className="py-12 sm:py-16 md:py-20 relative overflow-hidden bg-transparent"
-    >
-      {/* Animated background elements POTENZIATI */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          className="absolute w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 rounded-full opacity-10"
-          style={{
-            background: 'radial-gradient(circle, #1E90FF 0%, transparent 70%)',
-            top: '20%',
-            right: '-10%',
-            transform: `translateY(${scrollY * 0.3}px) rotate(${scrollY * 0.1}deg) scale(${isImageHovered ? 1.2 : 1})`,
-            transition: 'transform 0.5s ease-out',
-            animation: 'float 15s ease-in-out infinite',
-          }}
-        />
-        <div
-          className="absolute w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full opacity-10"
-          style={{
-            background: 'radial-gradient(circle, #FF1E90 0%, transparent 70%)',
-            bottom: '10%',
-            left: '-5%',
-            transform: `translateY(${-scrollY * 0.2}px) rotate(${-scrollY * 0.15}deg) scale(${isImageHovered ? 1.15 : 1})`,
-            transition: 'transform 0.5s ease-out',
-            animation: 'float 18s ease-in-out infinite reverse',
-          }}
-        />
-        <div
-          className="absolute w-40 h-40 sm:w-60 sm:h-60 md:w-80 md:h-80 rounded-full opacity-10"
-          style={{
-            background: 'radial-gradient(circle, #FFD700 0%, transparent 70%)',
-            top: '50%',
-            left: '50%',
-            transform: `translate(-50%, -50%) translateY(${scrollY * 0.15}px) rotate(${scrollY * 0.08}deg)`,
-            animation: 'float 20s ease-in-out infinite',
-          }}
-        />
-      </div>
+    <section id="chi-sono" className="py-20 sm:py-28 relative overflow-hidden bg-transparent">
+      {/* Minimalistic grid background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
-      {/* Interactive spotlight */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-20"
-        style={{
-          background: `radial-gradient(circle 300px at ${mousePosition.x}px ${mousePosition.y}px, rgba(30,144,255,0.15), transparent)`,
-        }}
-      />
+      {/* Subtle glow on the side */}
+      <div className="absolute -left-40 top-1/4 w-96 h-96 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 60%)' }} />
 
       <div className="max-w-6xl mx-auto px-5 sm:px-6 relative z-10">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-          <div className="animate-fade-in text-center md:text-left">
-            {/* Badge animato */}
-            <div className="inline-flex items-center gap-2 mb-4 sm:mb-6 px-3 sm:px-4 py-1.5 sm:py-2 bg-[rgba(20,20,30,0.6)] backdrop-blur-md rounded-full border border-blue-500/30 animate-bounceIn">
-              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400 animate-pulse" />
-              <span className="text-cyan-400 font-semibold text-xs sm:text-sm uppercase tracking-wider">Chi sono</span>
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+          {/* Text Content */}
+          <div className="space-y-8">
+            <div className="inline-flex items-center gap-3 px-4 py-2 bg-gray-900/50 border border-gray-800 rounded-lg">
+              <Terminal className="w-4 h-4 text-cyan-400" />
+              <span className="text-cyan-400 font-mono text-sm">~/frontend_architect.sh</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-white mb-4 sm:mb-6 leading-tight drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
-              Una mente giovane.
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 block relative mt-2">
-                Un approccio professionale.
-                <div
-                  className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-blue-600 to-transparent"
-                  style={{
-                    width: '60%',
-                    animation: 'expandWidth 2s ease-out forwards',
-                  }}
-                />
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight">
+              Pixel perfetti.<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">
+                Esperienze fluide.
               </span>
             </h2>
 
-            <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-300 leading-relaxed">
-              <p className="transform md:hover:translate-x-2 transition-transform duration-300 hover:text-white relative group">
-                <span className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:block shadow-[0_0_10px_rgba(0,212,255,0.8)]" />
-                Sono un web designer freelance. Aiuto piccole attività, negozi e professionisti
-                a presentarsi online con un sito chiaro, moderno e su misura.
+            <div className="space-y-6 text-gray-400 text-lg leading-relaxed border-l-2 border-gray-800 pl-6">
+              <p>
+                Sono specializzato nello sviluppo <strong>Frontend</strong> e nel <strong>Web Design</strong>.
+                Trasformo idee in interfacce utente dinamiche, accessibili e incredibilmente veloci, curando ogni singolo dettaglio visivo.
               </p>
-
-              <p className="transform md:hover:translate-x-2 transition-transform duration-300 hover:text-white relative group">
-                <span className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:block shadow-[0_0_10px_rgba(138,43,226,0.8)]" />
-                Ogni progetto è personalizzato e viene consegnato in pochi giorni,
-                con supporto e trasparenza.
+              <p>
+                Il mio obiettivo è unire design mozzafiato a codice strutturato e manutenibile, offrendo soluzioni digitali premium per chi vuole distinguersi online.
               </p>
+            </div>
 
-              {/* Skills badges */}
-              <div className="flex flex-wrap gap-2 sm:gap-3 pt-3 sm:pt-4 justify-center md:justify-start">
-                {[
-                  { icon: Code, label: 'Web Development', color: 'from-blue-500 to-cyan-500' },
-                  { icon: Palette, label: 'UI/UX Design', color: 'from-purple-500 to-pink-500' },
-                  { icon: Zap, label: 'Performance', color: 'from-yellow-500 to-orange-500' },
-                ].map((skill, i) => (
-                  <div
-                    key={i}
-                    className={`group flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r ${skill.color} rounded-full text-white text-xs sm:text-sm font-medium shadow-lg transform hover:scale-110 hover:-translate-y-1 transition-all duration-300 cursor-pointer`}
-                    style={{
-                      animation: `fadeInUp 0.5s ease-out ${i * 0.1}s both`,
-                    }}
-                  >
-                    <skill.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:rotate-12 transition-transform duration-300 flex-shrink-0" />
-                    <span>{skill.label}</span>
+            <div className="pt-4 grid sm:grid-cols-2 gap-4">
+              {[
+                { icon: Code, label: 'Modern Stack', desc: 'React, Vue, TypeScript' },
+                { icon: Layout, label: 'Styling & UI', desc: 'Tailwind CSS, Framer' },
+                { icon: Layers, label: 'Architettura', desc: 'Componenti scalabili' },
+                { icon: MonitorSmartphone, label: 'Responsive', desc: 'Mobile-first design' },
+              ].map((skill, i) => (
+                <div key={i} className="flex gap-4 p-4 rounded-xl bg-gray-900/40 border border-gray-800 hover:border-gray-700 transition-colors">
+                  <div className="p-3 bg-gray-800/80 rounded-lg h-fit">
+                    <skill.icon className="w-5 h-5 text-gray-300" />
                   </div>
-                ))}
-              </div>
-
-              <div className="flex items-center justify-center md:justify-start gap-3 sm:gap-4 pt-4 sm:pt-6">
-                <div
-                  className="relative w-12 h-12 sm:w-16 sm:h-16 nexivo-gradient rounded-full flex items-center justify-center group flex-shrink-0"
-                  style={{
-                    animation: 'pulse 2s ease-in-out infinite',
-                  }}
-                >
-                  <span className="text-white font-bold text-lg sm:text-2xl relative z-10">N</span>
-                  <div className="absolute inset-0 rounded-full animate-ping bg-blue-400 opacity-20 group-hover:opacity-40" style={{ animationDuration: '3s' }} />
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-300" />
+                  <div>
+                    <h4 className="text-white font-medium">{skill.label}</h4>
+                    <span className="text-sm text-gray-500">{skill.desc}</span>
+                  </div>
                 </div>
-                <div className="transform hover:translate-x-2 transition-transform duration-300 min-w-0">
-                  <p className="font-bold text-white text-base sm:text-lg tracking-wide">Nexivo</p>
-                  <p className="text-xs sm:text-sm text-cyan-400">Web Designer Freelance</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* Immagine - visibile solo da tablet in su */}
-          <div
-            className="hidden md:block animate-scale-in relative group"
-            style={{
-              transform: `translateX(${scrollY * 0.05}px) perspective(1000px) rotateY(${scrollY * 0.02}deg)`,
-              transition: 'transform 0.1s ease-out',
-            }}
-            onMouseEnter={() => setIsImageHovered(true)}
-            onMouseLeave={() => setIsImageHovered(false)}
-          >
-            <div className="absolute -inset-6 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl blur-3xl opacity-30 group-hover:opacity-70 transition-opacity duration-500" />
-
-            <div className="relative overflow-hidden rounded-2xl">
-              <img
-                src="/lovable-uploads/a09c768e-c145-4d1f-aa92-f10525a22e3e.png"
-                alt="Web development workspace"
-                className="rounded-2xl shadow-2xl w-full hover-lift relative z-10 transition-all duration-700"
-                style={{
-                  boxShadow: '0 25px 50px -12px rgba(30, 144, 255, 0.25)',
-                  transform: isImageHovered ? 'scale(1.05) rotateZ(2deg)' : 'scale(1) rotateZ(0deg)',
-                }}
-              />
-
-              <div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 pointer-events-none"
-                style={{
-                  animation: isImageHovered ? 'shimmer 2s ease-in-out infinite' : 'none',
-                }}
-              />
-
-              {isImageHovered && (
-                <div className="absolute inset-0 border-4 border-blue-400/50 rounded-2xl animate-border-glow" />
-              )}
-            </div>
-
-            <div
-              className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl opacity-80 blur-sm shadow-2xl"
-              style={{
-                animation: 'float 3s ease-in-out infinite, rotate 10s linear infinite',
-                transform: isImageHovered ? 'scale(1.3)' : 'scale(1)',
-                transition: 'transform 0.5s ease',
-              }}
-            >
-              <Zap className="w-12 h-12 text-white m-auto mt-6 animate-pulse" />
-            </div>
-            <div
-              className="absolute -bottom-8 -left-8 w-28 h-28 bg-gradient-to-br from-green-400 to-blue-500 rounded-full opacity-70 blur-sm shadow-2xl"
-              style={{
-                animation: 'float 4s ease-in-out infinite, rotate 12s linear infinite reverse',
-                animationDelay: '1s',
-                transform: isImageHovered ? 'scale(1.3)' : 'scale(1)',
-                transition: 'transform 0.5s ease',
-              }}
-            >
-              <Sparkles className="w-14 h-14 text-white m-auto mt-7 animate-spin-slow" />
-            </div>
-
-            {isImageHovered && (
-              <div className="absolute inset-0 pointer-events-none">
-                {[...Array(15)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="absolute w-2 h-2 bg-blue-400 rounded-full animate-particle-orbit"
-                    style={{
-                      left: `${50 + Math.cos(i * 24 * Math.PI / 180) * 50}%`,
-                      top: `${50 + Math.sin(i * 24 * Math.PI / 180) * 50}%`,
-                      animationDelay: `${i * 0.1}s`,
-                      animationDuration: '3s',
-                    }}
-                  />
-                ))}
+          {/* Visual/Image Terminal Window - Abstract Code Concept */}
+          <div className="relative group perspective-1000 hidden lg:block">
+            {/* Window frame */}
+            <div className="rounded-xl overflow-hidden bg-[#0d1117] border border-gray-800 shadow-2xl relative transform transition-transform duration-700 ease-out group-hover:rotate-y-2 group-hover:-rotate-x-2">
+              {/* Header */}
+              <div className="flex items-center gap-2 px-4 py-3 bg-[#161b22] border-b border-gray-800">
+                <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                <div className="ml-auto text-xs text-gray-500 font-mono">App.tsx</div>
               </div>
-            )}
+
+              {/* Content / Abstract Code */}
+              <div className="relative h-[400px] sm:h-[500px] bg-[#0d1117] p-6 sm:p-8 font-mono text-sm sm:text-base overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent pointer-events-none" />
+
+                <div className="space-y-2 relative z-10 text-gray-400 select-none">
+                  <div><span className="text-purple-400">import</span> {'{'} <span className="text-yellow-200">useState</span>, <span className="text-yellow-200">useEffect</span> {'}'} <span className="text-purple-400">from</span> <span className="text-green-300">'react'</span>;</div>
+                  <div><span className="text-purple-400">import</span> {'{'} <span className="text-yellow-200">Sparkles</span> {'}'} <span className="text-purple-400">from</span> <span className="text-green-300">'lucide-react'</span>;</div>
+                  <br />
+                  <div><span className="text-pink-400">const</span> <span className="text-blue-400">NexivoProfile</span> <span className="text-pink-400">=</span> () <span className="text-pink-400">=&gt;</span> {'{'}</div>
+
+                  <div className="pl-4 border-l border-gray-800 space-y-2 my-2">
+                    <div><span className="text-pink-400">const</span> [isAwesome, setIsAwesome] <span className="text-pink-400">=</span> <span className="text-yellow-200">useState</span>(<span className="text-orange-400">true</span>);</div>
+                    <br />
+                    <div><span className="text-purple-400">return</span> (</div>
+                    <div className="pl-4">
+                      <div>&lt;<span className="text-green-400">div</span> <span className="text-blue-300">className</span>=<span className="text-green-300">"flex flex-col items-center"</span>&gt;</div>
+                      <div className="pl-4">
+                        <div>&lt;<span className="text-green-400">h1</span> <span className="text-blue-300">className</span>=<span className="text-green-300">"text-transparent bg-clip-text"</span>&gt;</div>
+                        <div className="pl-4 text-gray-200">Frontend Excellence</div>
+                        <div>&lt;/<span className="text-green-400">h1</span>&gt;</div>
+                        <div>&lt;<span className="text-yellow-200">Sparkles</span> <span className="text-blue-300">className</span>=<span className="text-green-300">"animate-pulse text-cyan-400"</span> /&gt;</div>
+                      </div>
+                      <div>&lt;/<span className="text-green-400">div</span>&gt;</div>
+                    </div>
+                    <div>);</div>
+                  </div>
+                  <div>{'}'};</div>
+                  <br />
+                  <div><span className="text-purple-400">export default</span> <span className="text-blue-400">NexivoProfile</span>;</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Subtle glow behind the window */}
+            <div className="absolute -inset-2 opacity-50 group-hover:opacity-100 transition-opacity duration-700 -z-10" style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.15) 0%, rgba(16,185,129,0.15) 50%, transparent 80%)' }} />
+
+            <div className="absolute -right-12 -bottom-12 w-48 h-48 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%)' }} />
           </div>
+
         </div>
       </div>
-
-      <style>{`
-        @keyframes expandWidth {
-          from { width: 0%; }
-          to { width: 60%; }
-        }
-        
-        @keyframes pulse {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.05); }
-        }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(10deg); }
-        }
-
-        @keyframes rotate {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-
-        @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-
-        @keyframes border-glow {
-          0%, 100% { opacity: 0.3; box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
-          50% { opacity: 1; box-shadow: 0 0 40px rgba(59, 130, 246, 0.8); }
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes bounce-in {
-          0% {
-            opacity: 0;
-            transform: scale(0.3) translateY(-20px);
-          }
-          50% {
-            transform: scale(1.05) translateY(5px);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-          }
-        }
-
-        @keyframes particle-orbit {
-          0% {
-            transform: rotate(0deg) translateX(100px) rotate(0deg);
-            opacity: 0;
-          }
-          50% {
-            opacity: 1;
-          }
-          100% {
-            transform: rotate(360deg) translateX(100px) rotate(-360deg);
-            opacity: 0;
-          }
-        }
-
-        .animate-spin-slow {
-          animation: rotate 3s linear infinite;
-        }
-
-        .animate-border-glow {
-          animation: border-glow 2s ease-in-out infinite;
-        }
-
-        .animate-bounce-in {
-          animation: bounce-in 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
-        }
-
-        .animate-particle-orbit {
-          animation: particle-orbit 3s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
 };
