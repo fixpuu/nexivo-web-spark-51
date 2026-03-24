@@ -1,17 +1,40 @@
 import { ExternalLink, Terminal, Code, Cpu } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const Portfolio = () => {
+  const [giogioxiiVisible, setGiogioxiiVisible] = useState(false);
+
+  useEffect(() => {
+    const onLoad = () => {
+      setTimeout(() => setGiogioxiiVisible(true), 400);
+    };
+    window.addEventListener('load', onLoad);
+    return () => window.removeEventListener('load', onLoad);
+  }, []);
+
   const projects = [
     {
-      title: 'Giogioxii.com',
-      description: 'Sito web per content creator gaming con design moderno e community digitale.',
-      image: '/lovable-uploads/e48f6d34-36da-48df-937b-a7c72334c9d0.png',
-      tags: ['React', 'Tailwind', 'Motion'],
+      title: 'Giogioxii',
+      description: 'Homepage futuristica giallo/nero con hero fullscreen stile gaming. Interfaccia content creator per YouTube, punti community e call-to-action dinamiche.',
+      image: '/lovable-uploads/image-1774371932253.png',
+      tags: ['React', 'Tailwind', 'Framer Motion'],
       url: 'https://giogioxii.com',
       stats: [
         { label: 'Pages', value: '8+' },
         { label: 'Load', value: '<1s' },
         { label: 'Score', value: '98' }
+      ]
+    },
+    {
+      title: 'Le Refuge de la Pomme',
+      description: 'Landing page Airbnb per Le Refuge de la Pomme con gallerie fotografica, info alloggio, servizi e FAQ. Prenotazione disponibile esclusivamente su Airbnb, senza booking interno.',
+      image: '/lovable-uploads/image-1774371560423.png',
+      tags: ['React', 'Tailwind', 'Next.js'],
+      url: 'https://www.lerefugedelapomme.com',
+      stats: [
+        { label: 'Images', value: '20+' },
+        { label: 'Sections', value: '7' },
+        { label: 'Score', value: '96' }
       ]
     }
   ];
@@ -41,13 +64,13 @@ const Portfolio = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="flex justify-center">
+        <div className="flex flex-col items-center gap-8">
           {projects.map((project, index) => (
-            <div key={index} className="w-full max-w-4xl group">
+            <div key={index} className="w-full max-w-5xl group">
               <a href={project.url} target="_blank" rel="noopener noreferrer" className="block">
 
                 {/* Project Card */}
-                <div className="bg-[#12121a] border border-gray-800 rounded-2xl overflow-hidden hover:border-pink-500/50 transition-colors duration-500 shadow-2xl relative">
+                <div className={`bg-[#12121a] border border-gray-800 rounded-2xl overflow-hidden hover:border-pink-500/50 shadow-2xl relative transition-all duration-700 ${project.title === 'Giogioxii' ? (giogioxiiVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8') : 'opacity-100 translate-y-0'}`}>
 
                   {/* Subtle top glare */}
                   <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-pink-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -55,7 +78,7 @@ const Portfolio = () => {
                   <div className="grid md:grid-cols-2">
 
                     {/* Visual Side (Mockup/Image) */}
-                    <div className="relative aspect-video md:aspect-auto overflow-hidden bg-gray-900 border-b md:border-b-0 md:border-r border-gray-800">
+                    <div className="relative overflow-hidden bg-gray-900 border-b md:border-b-0 md:border-r border-gray-800">
                       {/* Overlay gradient */}
                       <div className="absolute inset-0 bg-gradient-to-tr from-pink-500/20 to-purple-500/20 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 

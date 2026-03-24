@@ -51,7 +51,12 @@ const Preloader = () => {
 
     return (
         <div
-            className={`fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#050508] transition-all duration-800 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'}`}
+            className={`fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#050508] ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+            style={{
+              clipPath: isVisible ? 'circle(100%)' : 'circle(0%)',
+              transition: 'clip-path 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 800ms ease-out',
+              willChange: 'clip-path'
+            }}
         >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.05)_0%,transparent_60%)] pointer-events-none" />
 
@@ -59,8 +64,8 @@ const Preloader = () => {
 
                 {/* Visual Icon */}
                 <div className="mb-8 relative">
-                    <div className="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full animate-pulse" />
-                    <Terminal className="w-12 h-12 text-cyan-400 relative z-10 animate-bounce" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 blur-2xl rounded-full animate-pulse opacity-60" />
+                    <Terminal className="w-12 h-12 text-cyan-400 relative z-10 animate-bounce drop-shadow-[0_0_15px_rgba(6,182,212,0.8)]" />
                 </div>
 
                 {/* Loading Text */}
