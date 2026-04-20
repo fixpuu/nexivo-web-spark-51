@@ -1,112 +1,137 @@
-import { ArrowRight, ArrowDown, Sparkles } from 'lucide-react';
-import { useEffect, useState, useMemo, memo } from 'react';
+import { useEffect, useRef } from 'react';
+import { ArrowRight } from 'lucide-react';
+import { motion } from 'motion/react';
+import Hls from 'hls.js';
 
-const AnimatedText = memo(({ texts, className = '' }: { texts: string[]; className?: string }) => {
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [currentText, setCurrentText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [charIndex, setCharIndex] = useState(0);
-
-  useEffect(() => {
-    const targetText = texts[currentTextIndex];
-
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        if (charIndex < targetText.length) {
-          setCurrentText(targetText.substring(0, charIndex + 1));
-          setCharIndex(charIndex + 1);
-        } else {
-          setTimeout(() => setIsDeleting(true), 1500);
-        }
-      } else {
-        if (charIndex > 0) {
-          setCurrentText(targetText.substring(0, charIndex - 1));
-          setCharIndex(charIndex - 1);
-        } else {
-          setIsDeleting(false);
-          setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
-        }
-      }
-    }, isDeleting ? 30 : 60);
-
-    return () => clearTimeout(timeout);
-  }, [charIndex, isDeleting, currentTextIndex, texts]);
-
-  return (
-    <span className={className}>
-      {currentText}
-      <span className="animate-pulse">|</span>
-    </span>
-  );
-});
-
-AnimatedText.displayName = 'AnimatedText';
+const HLS_URL = 'https://stream.mux.com/4IMYGcL01xjs7ek5ANO17JC4VQVUTsojZlnw4fXzwSxc.m3u8';
+const FALLBACK_MP4 = '/_videos/v1/f0c78f536d5f21a047fb7792723a36f9d647daa1';
 
 const Hero = () => {
-  const scrollToServizi = () => {
-    const element = document.getElementById('servizi');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    let hls: Hls | null = null;
+
+    if (Hls.isSupported()) {
+      hls = new Hls({ enableWorker: true });
+      hls.loadSource(HLS_URL);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        video.play().catch(() => { });
+      });
+      hls.on(Hls.Events.ERROR, (_event, data) => {
+        if (data.fatal) {
+          video.src = FALLBACK_MP4;
+          video.play().catch(() => { });
+        }
+      });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = HLS_URL;
+      video.addEventListener('loadedmetadata', () => {
+        video.play().catch(() => { });
+      });
+    } else {
+      video.src = FALLBACK_MP4;
+      video.play().catch(() => { });
     }
+
+    return () => {
+      if (hls) {
+        hls.destroy();
+      }
+    };
+  }, []);
+
+  const scrollToContact = () => {
+    const el = document.getElementById('contatti');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const animatedTexts = useMemo(() => [
-    'parlano chiaro.',
-    'stupiscono.',
-    'convincono.',
-    'conquistano.',
-    'emozionano.'
-  ], []);
-
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center bg-[#050508] relative overflow-hidden pt-20 md:pt-0">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#010101]">
 
-      {/* Abstract Gradient Orbs (NO BLUR FILTERS OR JS LOOPS - GPU ACCELERATED PURE CSS) */}
+      {/* Video background */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ mixBlendMode: 'screen' }}
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+        <div className="absolute inset-0 bg-[#010101]/85" />
+      </div>
+
+      {/* Abstract Gradient Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }}>
         <div
-          className="absolute w-64 h-64 sm:w-[600px] sm:h-[600px] rounded-full opacity-60 animate-float-slow"
+          className="absolute w-64 h-64 sm:w-[600px] sm:h-[600px] rounded-full opacity-50 animate-float-slow"
           style={{
-            background: 'radial-gradient(circle, rgba(30,144,255,0.15) 0%, transparent 60%)',
+            background: 'radial-gradient(circle, rgba(201,103,232,0.15) 0%, transparent 60%)',
             top: '5%',
             left: '5%',
           }}
         />
         <div
-          className="absolute w-48 h-48 sm:w-[500px] sm:h-[500px] rounded-full opacity-60 animate-float-delayed"
+          className="absolute w-48 h-48 sm:w-[500px] sm:h-[500px] rounded-full opacity-50 animate-float-delayed"
           style={{
-            background: 'radial-gradient(circle, rgba(255,30,144,0.12) 0%, transparent 60%)',
+            background: 'radial-gradient(circle, rgba(250,147,250,0.12) 0%, transparent 60%)',
             bottom: '10%',
             right: '10%',
           }}
         />
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center relative" style={{ zIndex: 10 }}>
-        <div className="animate-fade-in">
+      {/* Main Content — z-20 above video */}
+      <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 text-center pt-28 sm:pt-32 md:pt-36">
 
-          <h1
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight px-4 drop-shadow-2xl"
-          >
-            <span className="inline-block">Siti web che</span> <br className="sm:hidden" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 block sm:inline-block sm:ml-4 relative mt-2 sm:mt-0">
-              <AnimatedText
-                texts={animatedTexts}
-              />
-            </span>
-          </h1>
-
-          <p className="text-sm sm:text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed px-4 animate-fade-in-delayed">
-            Architetture Frontend moderne. Design mozzafiato. Costruisco la tua vetrina digitale con codice <span className="text-cyan-400 font-mono">pulito</span> e <span className="text-purple-400 font-mono">ottimizzato</span>.
-          </p>
-        </div>
-
-        {/* Scroll indicator */}
-        <div
-          className="absolute left-1/2 -bottom-24 sm:-bottom-32 -translate-x-1/2 cursor-pointer animate-bounce opacity-50 hover:opacity-100 transition-opacity"
-          onClick={scrollToServizi}
+        {/* Main Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.25 }}
+          className="text-[48px] sm:text-[56px] md:text-[68px] lg:text-[80px] font-black leading-[1.05] tracking-tight mb-6"
         >
-          <ArrowDown className="w-6 h-6 text-cyan-400" />
-        </div>
+          <span className="block gradient-text">La Tua Visione</span>
+          <span className="block gradient-text">La Nostra Realtà Digitale.</span>
+        </motion.h1>
+
+        {/* Subheadline */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.45 }}
+          className="text-white/80 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10"
+        >
+          Trasformiamo idee ambiziose in design moderni che non solo colpiscono, ma fanno crescere il tuo business velocemente.
+        </motion.p>
+
+        {/* CTA Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.6 }}
+          className="inline-block"
+        >
+          <button
+            onClick={scrollToContact}
+            className="group relative"
+          >
+            {/* Glass border wrapper */}
+            <div className="absolute -inset-[1px] rounded-full bg-gradient-to-r from-[#FA93FA]/30 via-[#C967E8]/20 to-[#983AD6]/30 blur-sm" />
+            <div className="relative flex items-center gap-3 bg-white text-black px-7 py-3.5 rounded-full font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.03]">
+              <span>Prenota una call di 15 min</span>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#FA93FA] via-[#C967E8] to-[#983AD6] flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <ArrowRight className="w-4 h-4 text-white" />
+              </div>
+            </div>
+          </button>
+        </motion.div>
       </div>
     </section>
   );

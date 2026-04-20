@@ -19,22 +19,20 @@ const Preloader = () => {
     useEffect(() => {
         let progressInterval: NodeJS.Timeout;
 
-        // Progress automation
         progressInterval = setInterval(() => {
             setProgress((prev) => {
-                const step = Math.random() * 8 + 2; // Slower progress for longer feel
+                const step = Math.random() * 8 + 2;
                 const next = prev + step;
 
                 if (next >= 100) {
                     clearInterval(progressInterval);
                     setTimeout(() => {
-                        setIsVisible(false); // Start fade out
-                        setTimeout(() => setLoading(false), 800); // Wait for fade out to complete
-                    }, 500); // Stay at 100% for brief moment
+                        setIsVisible(false);
+                        setTimeout(() => setLoading(false), 800);
+                    }, 500);
                     return 100;
                 }
 
-                // Update text stage based on progress
                 const currentStage = Math.floor((next / 100) * stages.length);
                 if (currentStage !== stage && currentStage < stages.length) {
                     setStage(currentStage);
@@ -42,7 +40,7 @@ const Preloader = () => {
 
                 return next;
             });
-        }, 120); // 120ms tick rate for a longer preloader
+        }, 120);
 
         return () => clearInterval(progressInterval);
     }, [stage, stages.length]);
@@ -51,46 +49,44 @@ const Preloader = () => {
 
     return (
         <div
-            className={`fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#050508] ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+            className={`fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#010101] ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
             style={{
-              clipPath: isVisible ? 'circle(100%)' : 'circle(0%)',
-              transition: 'clip-path 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 800ms ease-out',
-              willChange: 'clip-path'
+                clipPath: isVisible ? 'circle(100%)' : 'circle(0%)',
+                transition: 'clip-path 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 800ms ease-out',
+                willChange: 'clip-path'
             }}
         >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.05)_0%,transparent_60%)] pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(201,103,232,0.05)_0%,transparent_60%)] pointer-events-none" />
 
             <div className="w-full max-w-md px-8 relative z-10 flex flex-col items-center">
 
                 {/* Visual Icon */}
                 <div className="mb-8 relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 blur-2xl rounded-full animate-pulse opacity-60" />
-                    <Terminal className="w-12 h-12 text-cyan-400 relative z-10 animate-bounce drop-shadow-[0_0_15px_rgba(6,182,212,0.8)]" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#FA93FA] via-[#C967E8] to-[#983AD6] blur-2xl rounded-full animate-pulse opacity-60" />
+                    <Terminal className="w-12 h-12 text-[#C967E8] relative z-10 animate-bounce drop-shadow-[0_0_15px_rgba(201,103,232,0.8)]" />
                 </div>
 
                 {/* Loading Text */}
                 <div className="mb-6 h-6 text-center text-sm sm:text-base text-gray-300 font-mono flex items-center gap-2">
-                    <span className="text-purple-400">{'>'}</span>
+                    <span className="text-[#983AD6]">{'>'}</span>
                     {stages[stage]}
-                    <span className="w-1.5 h-4 bg-cyan-400 animate-pulse inline-block" />
+                    <span className="w-1.5 h-4 bg-[#C967E8] animate-pulse inline-block" />
                 </div>
 
-                {/* Progress Bar Container */}
-                <div className="w-full h-1.5 bg-gray-900 rounded-full overflow-hidden p-[1px] shadow-[0_0_15px_rgba(6,182,212,0.2)]">
-                    {/* The Fill */}
+                {/* Progress Bar */}
+                <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden p-[1px] shadow-[0_0_15px_rgba(201,103,232,0.2)]">
                     <div
-                        className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 transition-all duration-300 ease-out relative"
+                        className="h-full rounded-full bg-gradient-to-r from-[#FA93FA] via-[#C967E8] to-[#983AD6] transition-all duration-300 ease-out relative"
                         style={{ width: `${progress}%` }}
                     >
-                        {/* Shimmer effect inside the bar */}
                         <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent)] animate-[shimmer_1.5s_infinite] -translate-x-full" />
                     </div>
                 </div>
 
-                {/* Percentage & Status */}
+                {/* Percentage */}
                 <div className="w-full mt-4 flex justify-between items-center text-xs font-mono">
                     <span className="text-gray-500">SYSTEM.BOOT</span>
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 font-bold text-lg">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FA93FA] to-[#983AD6] font-bold text-lg">
                         {Math.floor(progress)}%
                     </span>
                 </div>

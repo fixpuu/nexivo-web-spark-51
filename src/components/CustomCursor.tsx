@@ -82,13 +82,13 @@ const CustomCursor = () => {
             {/* Outer Ring */}
             <div
                 ref={cursorRingRef}
-                className={`fixed top-0 left-0 pointer-events-none z-[9999] w-6 h-6 rounded-full border border-cyan-400 transition-all duration-300 ease-out will-change-transform ${isClicking ? 'bg-cyan-400/30 scale-75' : isHovering ? 'scale-[1.5] bg-cyan-400/10' : 'bg-transparent scale-100'
+                className={`fixed top-0 left-0 pointer-events-none z-[9999] w-6 h-6 rounded-full border border-[#C967E8] transition-all duration-300 ease-out will-change-transform ${isClicking ? 'bg-[#C967E8]/30 scale-75' : isHovering ? 'scale-[1.5] bg-[#C967E8]/10' : 'bg-transparent scale-100'
                     }`}
             />
             {/* Inner Dot */}
             <div
                 ref={cursorDotRef}
-                className={`fixed top-0 left-0 pointer-events-none z-[9999] w-1.5 h-1.5 bg-cyan-400 rounded-full transition-opacity duration-300 will-change-transform ${isHovering ? 'opacity-0' : 'opacity-100'
+                className={`fixed top-0 left-0 pointer-events-none z-[9999] w-1.5 h-1.5 bg-[#C967E8] rounded-full transition-opacity duration-300 will-change-transform ${isHovering ? 'opacity-0' : 'opacity-100'
                     }`}
             />
         </>

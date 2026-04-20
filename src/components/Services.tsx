@@ -6,46 +6,46 @@ const Services = () => {
       icon: Monitor,
       title: 'Design su misura',
       description: 'Layout personalizzati, moderni e completamente responsivi. Design unico che rispecchia la tua identità e converte gli utenti.',
-      color: 'text-cyan-400',
-      bgFade: 'from-cyan-500/10 to-transparent',
-      borderGlow: 'group-hover:border-cyan-500/50',
+      color: 'text-[#FA93FA]',
+      bgFade: 'from-[#FA93FA]/10 to-transparent',
+      borderGlow: 'group-hover:border-[#FA93FA]/50',
       features: ['UI/UX Professionale', 'Mobile First', 'Brand Identity']
     },
     {
       icon: FileText,
       title: 'Contenuti inclusi',
       description: 'Inserisco testi, immagini, logo e tutto il necessario per rendere il tuo sito completo, veloce e subito pronto al lancio.',
-      color: 'text-purple-400',
-      bgFade: 'from-purple-500/10 to-transparent',
-      borderGlow: 'group-hover:border-purple-500/50',
+      color: 'text-[#C967E8]',
+      bgFade: 'from-[#C967E8]/10 to-transparent',
+      borderGlow: 'group-hover:border-[#C967E8]/50',
       features: ['Copy basic', 'Ottimizzazione Assets', 'SEO Friendly']
     },
     {
       icon: Globe,
       title: 'Pubblicazione online',
       description: 'Ti aiuto a mettere online il sito sul tuo dominio. Gestione hosting, configurazione DNS e certificati di sicurezza.',
-      color: 'text-emerald-400',
-      bgFade: 'from-emerald-500/10 to-transparent',
-      borderGlow: 'group-hover:border-emerald-500/50',
+      color: 'text-[#983AD6]',
+      bgFade: 'from-[#983AD6]/10 to-transparent',
+      borderGlow: 'group-hover:border-[#983AD6]/50',
       features: ['Hosting Setup', 'SSL Certificate', 'Dominio personalizzato']
     }
   ];
 
   return (
-    <section id="servizi" className="py-20 sm:py-28 relative bg-[#050508] border-y border-gray-900">
+    <section id="servizi" className="py-20 sm:py-28 relative bg-[#010101] border-y border-white/5">
 
-      {/* Background patterns */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-900/40 via-[#050508] to-[#050508] pointer-events-none" />
+      {/* Background */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#983AD6]/5 via-[#010101] to-[#010101] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-5 sm:px-6 relative z-10">
         <div className="text-center mb-16 sm:mb-24">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-900/80 border border-gray-800 rounded-full mb-6 text-sm text-gray-400 font-mono">
-            <Server className="w-4 h-4 text-cyan-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/[0.03] border border-white/10 rounded-full mb-6 text-sm text-gray-400 font-mono backdrop-blur-sm">
+            <Server className="w-4 h-4 text-[#C967E8]" />
             <span>sys.services.load()</span>
           </div>
 
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight">
-            I miei <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-500">servizi</span>
+            I miei <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FA93FA] to-[#983AD6]">servizi</span>
           </h2>
           <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
             Soluzioni complete, performanti e scalabili per la tua presenza online.
@@ -56,12 +56,12 @@ const Services = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className={`group relative bg-[#0a0a0f] border border-gray-800 rounded-2xl p-8 overflow-hidden transition-all duration-300 ${service.borderGlow} hover:-translate-y-2 hover:shadow-2xl`}
+              className={`group relative bg-white/[0.02] border border-white/10 rounded-2xl p-8 overflow-hidden transition-all duration-300 ${service.borderGlow} hover:-translate-y-2 hover:shadow-2xl backdrop-blur-sm`}
             >
               <div className={`absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b ${service.bgFade} opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`} />
 
               <div className="relative z-10">
-                <div className={`w-14 h-14 rounded-xl bg-gray-900 flex items-center justify-center mb-6 border border-gray-800 ${service.color}`}>
+                <div className={`w-14 h-14 rounded-xl bg-white/[0.05] flex items-center justify-center mb-6 border border-white/10 ${service.color}`}>
                   <service.icon className="w-7 h-7" />
                 </div>
 
@@ -83,11 +83,11 @@ const Services = () => {
                 </div>
               </div>
 
-              {/* Decorative pseudo-terminal dots */}
+              {/* Decorative dots */}
               <div className="absolute top-4 right-4 flex gap-1.5 opacity-30">
-                <div className="w-2 h-2 rounded-full bg-red-500" />
-                <div className="w-2 h-2 rounded-full bg-yellow-500" />
-                <div className="w-2 h-2 rounded-full bg-green-500" />
+                <div className="w-2 h-2 rounded-full bg-[#FA93FA]" />
+                <div className="w-2 h-2 rounded-full bg-[#C967E8]" />
+                <div className="w-2 h-2 rounded-full bg-[#983AD6]" />
               </div>
             </div>
           ))}
