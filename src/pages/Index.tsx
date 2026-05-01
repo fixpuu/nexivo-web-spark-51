@@ -1,5 +1,6 @@
-
+import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { AnimatePresence, motion } from 'motion/react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import About from '../components/About';
@@ -8,9 +9,10 @@ import Services from '../components/Services';
 import Portfolio from '../components/Portfolio';
 import Pricing from '../components/Pricing';
 import Contact from '../components/Contact';
-import Preloader from '../components/Preloader';
+import LoadingScreen from '../components/LoadingScreen';
 import CustomCursor from '../components/CustomCursor';
 import InfiniteSlider from '../components/ui/infinite-slider';
+import { Cpu, Globe, Code2 } from 'lucide-react';
 
 const LOGO_URLS = [
   'https://html.tailus.io/blocks/customers/openai.svg',
@@ -78,41 +80,72 @@ const LogoCloud = () => (
   </section>
 );
 
+const GlobalBackground = () => (
+  <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#010101]">
+    {/* Optimized Animated Blobs */}
+    <motion.div
+      animate={{
+        x: ['-5%', '5%'],
+        y: ['-5%', '5%'],
+        opacity: [0.03, 0.05, 0.03]
+      }}
+      transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+      className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-[#983AD6] blur-[100px] rounded-full will-change-transform"
+    />
+    <motion.div
+      animate={{
+        x: ['5%', '-5%'],
+        y: ['5%', '-5%'],
+        opacity: [0.02, 0.04, 0.02]
+      }}
+      transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+      className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-[#FA93FA] blur-[80px] rounded-full will-change-transform"
+    />
+
+    {/* Simplified Beams */}
+    <div className="absolute inset-0 opacity-[0.03] bg-gradient-to-tr from-[#C967E8]/10 via-transparent to-transparent animate-pulse" />
+  </div>
+);
+
 const Index = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
-    <div className="min-h-screen bg-[#010101] text-gray-100 overflow-hidden font-inter selection:bg-purple-500/30">
-      <Preloader />
-      <CustomCursor />
-      <Navbar />
-      <Hero />
+    <div className="min-h-screen bg-[#010101] text-gray-100 font-inter selection:bg-purple-500/30">
+      <AnimatePresence mode="wait">
+        {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+      </AnimatePresence>
 
-      <LogoCloud />
+      <div style={{
+        opacity: isLoading ? 0 : 1,
+        transition: "opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1)",
+        pointerEvents: isLoading ? 'none' : 'auto'
+      }}>
+        <GlobalBackground />
+        <CustomCursor />
+        <Navbar />
 
-      <AnimatedSection delay={200}>
-        <About />
-      </AnimatedSection>
+        <main className="relative z-10 w-full overflow-x-hidden">
+          <Hero />
 
-      <AnimatedSection delay={300}>
-        <Timeline />
-      </AnimatedSection>
+          <div className="space-y-0 relative">
+            <AnimatedSection delay={100}>
+              <Services />
+            </AnimatedSection>
 
-      <AnimatedSection delay={400}>
-        <Services />
-      </AnimatedSection>
+            <AnimatedSection delay={200}>
+              <Portfolio />
+            </AnimatedSection>
 
-      <AnimatedSection delay={400}>
-        <Portfolio />
-      </AnimatedSection>
-
-      <AnimatedSection delay={500}>
-        <Pricing />
-      </AnimatedSection>
-
-      <AnimatedSection delay={600}>
-        <Contact />
-      </AnimatedSection>
+            <AnimatedSection delay={300}>
+              <Contact />
+            </AnimatedSection>
+          </div>
+        </main>
+      </div>
     </div>
   );
 };
 
 export default Index;
+

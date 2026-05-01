@@ -1,14 +1,17 @@
 import { Check, Sparkles, Terminal, Code2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { motion } from 'motion/react';
+import { useInView } from 'react-intersection-observer';
 
 const Pricing = () => {
   const { toast } = useToast();
+  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
 
   const copyEmailAndNotify = () => {
     const email = 'nexivowebs@hotmail.com';
     navigator.clipboard.writeText(email);
     toast({
-      title: "Email copiata! 📧",
+      title: "Email copiata!",
       description: "nexivowebs@hotmail.com copiata negli appunti. Scrivimi per un preventivo personalizzato!",
     });
   };
@@ -21,7 +24,7 @@ const Pricing = () => {
       'Inserimento completo di contenuti (testi, immagini, logo)',
       'Galleria fotografica e portfolio interattivo',
       'Integrazione social media e contatti',
-      'Velocità di caricamento ottimizzata (90+ Lighthouse)',
+      'Velocita di caricamento ottimizzata (90+ Lighthouse)',
       'Hosting cloud gratuito per 1 anno',
       'Supporto tecnico completo per 3 mesi',
       'Consegna garantita in 7 giorni lavorativi'
@@ -36,32 +39,47 @@ const Pricing = () => {
 
   return (
     <section id="prezzi" className="py-20 sm:py-28 relative bg-[#010101]">
-
-      {/* Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(201,103,232,0.08) 0%, transparent 70%)' }} />
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none morph-blob" style={{ background: 'radial-gradient(circle, rgba(201,103,232,0.08) 0%, transparent 70%)' }} />
 
-      <div className="max-w-5xl mx-auto px-5 sm:px-6 relative z-10">
-
+      <div ref={ref} className="max-w-5xl mx-auto px-5 sm:px-6 relative z-10">
         <div className="text-center mb-16 sm:mb-24">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/[0.03] border border-white/10 rounded-full mb-6 backdrop-blur-sm">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-3 py-1 bg-white/[0.03] border border-white/10 rounded-full mb-6 backdrop-blur-sm"
+          >
             <Code2 className="w-4 h-4 text-[#C967E8]" />
             <span className="text-[#C967E8] font-mono text-sm">npm run pricing</span>
-          </div>
+          </motion.div>
 
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight">
-            Investimento <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FA93FA] to-[#983AD6]">Trasparente</span>
-          </h2>
-          <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight"
+          >
+            Investimento <span className="text-shimmer">Trasparente</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto"
+          >
             Soluzioni studiate per massimizzare il ROI, senza costi nascosti.
-          </p>
+          </motion.p>
         </div>
 
         <div className="grid lg:grid-cols-5 gap-8 items-start">
-
           {/* Main Package */}
-          <div className="lg:col-span-3 bg-white/[0.02] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative group hover:border-[#C967E8]/50 transition-colors duration-500 backdrop-blur-sm">
-            {/* Top accent */}
+          <motion.div
+            initial={{ opacity: 0, y: 40, scale: 0.97 }}
+            animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-3 bg-white/[0.02] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative group hover:border-[#C967E8]/50 transition-all duration-500 backdrop-blur-sm"
+          >
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FA93FA] via-[#C967E8] to-[#983AD6]" />
 
             <div className="p-8 sm:p-10">
@@ -76,22 +94,28 @@ const Pricing = () => {
               </div>
 
               <div className="mb-8 p-4 bg-white/[0.03] border border-white/10 rounded-xl">
-                <div className="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FA93FA] to-[#983AD6] mb-2">
+                <div className="text-3xl sm:text-4xl font-black text-shimmer mb-2">
                   Preventivo su misura
                 </div>
                 <p className="text-gray-400 text-sm">
-                  Tariffa calcolata in base alla complessità e ai requisiti tecnici del progetto.
+                  Tariffa calcolata in base alla complessita e ai requisiti tecnici del progetto.
                 </p>
               </div>
 
               <div className="space-y-4 mb-10">
                 {servicesInfo.features.map((feature, idx) => (
-                  <div key={idx} className="flex items-start gap-4 group/item">
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, x: -15 }}
+                    animate={inView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ delay: 0.3 + idx * 0.05 }}
+                    className="flex items-start gap-4 group/item"
+                  >
                     <div className="mt-1 bg-white/[0.05] border border-white/10 group-hover/item:border-[#C967E8]/50 rounded-md p-1 transition-colors">
                       <Check className="w-4 h-4 text-[#C967E8]" />
                     </div>
                     <span className="text-gray-300 group-hover/item:text-white transition-colors">{feature}</span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
 
@@ -100,22 +124,28 @@ const Pricing = () => {
                   <Terminal className="w-4 h-4" /> root@nexivo:~# Note sui domini
                 </div>
                 <p className="text-sm text-gray-400 leading-relaxed pl-6">
-                  Il dominio personalizzato dovrà essere scelto e registrato dal cliente. Offro supporto SSH/DNS setup incluso.
+                  Il dominio personalizzato dovra essere scelto e registrato dal cliente. Offro supporto SSH/DNS setup incluso.
                 </p>
               </div>
 
-              <button
+              <motion.button
                 onClick={copyEmailAndNotify}
-                className="w-full py-4 bg-white hover:bg-gray-100 text-black font-bold text-lg rounded-xl transition-all duration-300 transform active:scale-[0.98] shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                whileHover={{ y: -2, scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full py-4 bg-white hover:bg-gray-100 text-black font-bold text-lg rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(201,103,232,0.2)] cursor-pointer"
               >
                 Inizia il tuo progetto
-              </button>
+              </motion.button>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Add-ons sidebar */}
-          <div className="lg:col-span-2 space-y-6">
-
+          {/* Sidebar */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-2 space-y-6"
+          >
             <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-[#983AD6]/30 transition-colors duration-300 backdrop-blur-sm">
               <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                 <Terminal className="w-5 h-5 text-[#983AD6]" /> Moduli Aggiuntivi
@@ -131,7 +161,7 @@ const Pricing = () => {
             </div>
 
             <div className="bg-gradient-to-br from-white/[0.03] to-[#010101] border border-white/10 rounded-2xl p-6 sm:p-8 relative overflow-hidden group hover:border-[#C967E8]/30 transition-colors backdrop-blur-sm">
-              <div className="absolute top-0 right-0 w-32 h-32 rounded-full transition-colors" style={{ background: 'radial-gradient(circle, rgba(201,103,232,0.08) 0%, transparent 70%)' }} />
+              <div className="absolute top-0 right-0 w-32 h-32 rounded-full" style={{ background: 'radial-gradient(circle, rgba(201,103,232,0.08) 0%, transparent 70%)' }} />
               <div className="relative z-10">
                 <h4 className="text-white font-bold mb-2">Budget Flessibile</h4>
                 <p className="text-sm text-gray-400 leading-relaxed">
@@ -139,9 +169,7 @@ const Pricing = () => {
                 </p>
               </div>
             </div>
-
-          </div>
-
+          </motion.div>
         </div>
       </div>
     </section>
